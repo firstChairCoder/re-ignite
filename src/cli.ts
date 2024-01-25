@@ -1,4 +1,4 @@
-import { build } from "gluegun"
+import { build } from "gluegun";
 
 /**
  * Create the cli and kick it off
@@ -10,9 +10,9 @@ async function run(argv) {
     .exclude(["semver", "http", "template"])
     .src(__dirname)
     .defaultCommand(require("./commands/help"))
-    .create()
+    .create();
 
-  return cli.run(argv)
+  return cli.run(argv);
 }
 
-module.exports = { run }
+module.exports = { run };

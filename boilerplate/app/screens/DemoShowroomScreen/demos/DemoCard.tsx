@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
+
 import { AutoImage, Button, Card, Icon } from "../../../components"
 import { colors, spacing } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
@@ -118,7 +119,7 @@ export const DemoCard: Demo = {
             maxHeight={60}
             style={{ alignSelf: "center" }}
             source={{
-              uri: "https://user-images.githubusercontent.com/1775841/184508739-f90d0ce5-7219-42fd-a91f-3382d016eae0.png",
+              uri: "https://user-images.githubusercontent.com/1775841/184508739-f90d0ce5-7219-42fd-a91f-3382d016eae0.png"
             }}
           />
         }
@@ -134,7 +135,7 @@ export const DemoCard: Demo = {
             maxHeight={60}
             style={{ alignSelf: "center" }}
             source={{
-              uri: "https://user-images.githubusercontent.com/1775841/184508739-f90d0ce5-7219-42fd-a91f-3382d016eae0.png",
+              uri: "https://user-images.githubusercontent.com/1775841/184508739-f90d0ce5-7219-42fd-a91f-3382d016eae0.png"
             }}
           />
         }
@@ -152,16 +153,16 @@ export const DemoCard: Demo = {
           textDecorationLine: "underline line-through",
           textDecorationStyle: "dashed",
           color: colors.error,
-          textDecorationColor: colors.error,
+          textDecorationColor: colors.error
         }}
         style={{
           shadowRadius: 5,
           shadowColor: colors.error,
-          shadowOpacity: 0.5,
+          shadowOpacity: 0.5
         }}
       />
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

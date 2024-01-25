@@ -3,11 +3,11 @@
 
 import { Platform } from "react-native"
 import {
-  SpaceGrotesk_300Light as spaceGroteskLight,
-  SpaceGrotesk_400Regular as spaceGroteskRegular,
-  SpaceGrotesk_500Medium as spaceGroteskMedium,
-  SpaceGrotesk_600SemiBold as spaceGroteskSemiBold,
   SpaceGrotesk_700Bold as spaceGroteskBold,
+  SpaceGrotesk_300Light as spaceGroteskLight,
+  SpaceGrotesk_500Medium as spaceGroteskMedium,
+  SpaceGrotesk_400Regular as spaceGroteskRegular,
+  SpaceGrotesk_600SemiBold as spaceGroteskSemiBold
 } from "@expo-google-fonts/space-grotesk"
 
 export const customFontsToLoad = {
@@ -15,7 +15,7 @@ export const customFontsToLoad = {
   spaceGroteskRegular,
   spaceGroteskMedium,
   spaceGroteskSemiBold,
-  spaceGroteskBold,
+  spaceGroteskBold
 }
 
 const fonts = {
@@ -25,30 +25,30 @@ const fonts = {
     normal: "spaceGroteskRegular",
     medium: "spaceGroteskMedium",
     semiBold: "spaceGroteskSemiBold",
-    bold: "spaceGroteskBold",
+    bold: "spaceGroteskBold"
   },
   helveticaNeue: {
     // iOS only font.
     thin: "HelveticaNeue-Thin",
     light: "HelveticaNeue-Light",
     normal: "Helvetica Neue",
-    medium: "HelveticaNeue-Medium",
+    medium: "HelveticaNeue-Medium"
   },
   courier: {
     // iOS only font.
-    normal: "Courier",
+    normal: "Courier"
   },
   sansSerif: {
     // Android only font.
     thin: "sans-serif-thin",
     light: "sans-serif-light",
     normal: "sans-serif",
-    medium: "sans-serif-medium",
+    medium: "sans-serif-medium"
   },
   monospace: {
     // Android only font.
-    normal: "monospace",
-  },
+    normal: "monospace"
+  }
 }
 
 export const typography = {
@@ -67,5 +67,5 @@ export const typography = {
   /**
    * Lets get fancy with a monospace font!
    */
-  code: Platform.select({ ios: fonts.courier, android: fonts.monospace }),
+  code: Platform.select({ ios: fonts.courier, android: fonts.monospace })
 }

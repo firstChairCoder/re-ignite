@@ -1,40 +1,29 @@
 import { observer } from "mobx-react-lite"
-import React, { ComponentType, FC, useEffect, useMemo } from "react"
-import {
+import type { ComponentType, FC } from "react"
+import React, { useEffect, useMemo } from "react"
+import type {
   AccessibilityProps,
-  ActivityIndicator,
-  Image,
   ImageSourcePropType,
   ImageStyle,
-  Platform,
-  StyleSheet,
   TextStyle,
-  View,
-  ViewStyle,
+  ViewStyle
 } from "react-native"
+import { ActivityIndicator, Image, Platform, StyleSheet, View } from "react-native"
 import { type ContentStyle } from "@shopify/flash-list"
 import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
+  withSpring
 } from "react-native-reanimated"
-import {
-  Button,
-  ButtonAccessoryProps,
-  Card,
-  EmptyState,
-  Icon,
-  ListView,
-  Screen,
-  Text,
-  Toggle,
-} from "../components"
+
+import type { ButtonAccessoryProps } from "../components"
+import { Button, Card, EmptyState, Icon, ListView, Screen, Text, Toggle } from "../components"
 import { isRTL, translate } from "../i18n"
 import { useStores } from "../models"
-import { Episode } from "../models/Episode"
-import { DemoTabScreenProps } from "../navigators/DemoNavigator"
+import type { Episode } from "../models/Episode"
+import type { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { colors, spacing } from "../theme"
 import { delay } from "../utils/delay"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
@@ -136,13 +125,13 @@ export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = 
         />
       </Screen>
     )
-  },
+  }
 )
 
 const EpisodeCard = observer(function EpisodeCard({
   episode,
   isFavorite,
-  onPressFavorite,
+  onPressFavorite
 }: {
   episode: Episode
   onPressFavorite: () => void
@@ -159,10 +148,10 @@ const EpisodeCard = observer(function EpisodeCard({
     return {
       transform: [
         {
-          scale: interpolate(liked.value, [0, 1], [1, 0], Extrapolate.EXTEND),
-        },
+          scale: interpolate(liked.value, [0, 1], [1, 0], Extrapolate.EXTEND)
+        }
       ],
-      opacity: interpolate(liked.value, [0, 1], [1, 0], Extrapolate.CLAMP),
+      opacity: interpolate(liked.value, [0, 1], [1, 0], Extrapolate.CLAMP)
     }
   })
 
@@ -171,10 +160,10 @@ const EpisodeCard = observer(function EpisodeCard({
     return {
       transform: [
         {
-          scale: liked.value,
-        },
+          scale: liked.value
+        }
       ],
-      opacity: liked.value,
+      opacity: liked.value
     }
   })
 
@@ -188,25 +177,25 @@ const EpisodeCard = observer(function EpisodeCard({
         ios: {
           accessibilityLabel: episode.title,
           accessibilityHint: translate("demoPodcastListScreen.accessibility.cardHint", {
-            action: isFavorite ? "unfavorite" : "favorite",
-          }),
+            action: isFavorite ? "unfavorite" : "favorite"
+          })
         },
         android: {
           accessibilityLabel: episode.title,
           accessibilityActions: [
             {
               name: "longpress",
-              label: translate("demoPodcastListScreen.accessibility.favoriteAction"),
-            },
+              label: translate("demoPodcastListScreen.accessibility.favoriteAction")
+            }
           ],
           onAccessibilityAction: ({ nativeEvent }) => {
             if (nativeEvent.actionName === "longpress") {
               handlePressFavorite()
             }
-          },
-        },
+          }
+        }
       }),
-    [episode, isFavorite],
+    [episode, isFavorite]
   )
 
   const handlePressFavorite = () => {
@@ -242,7 +231,7 @@ const EpisodeCard = observer(function EpisodeCard({
           </View>
         )
       },
-    [],
+    []
   )
 
   return (
@@ -302,56 +291,56 @@ const EpisodeCard = observer(function EpisodeCard({
 
 // #region Styles
 const $screenContentContainer: ViewStyle = {
-  flex: 1,
+  flex: 1
 }
 
 const $listContentContainer: ContentStyle = {
   paddingHorizontal: spacing.lg,
   paddingTop: spacing.lg + spacing.xl,
-  paddingBottom: spacing.lg,
+  paddingBottom: spacing.lg
 }
 
 const $heading: ViewStyle = {
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }
 
 const $item: ViewStyle = {
   padding: spacing.md,
   marginTop: spacing.md,
-  minHeight: 120,
+  minHeight: 120
 }
 
 const $itemThumbnail: ImageStyle = {
   marginTop: spacing.sm,
   borderRadius: 50,
-  alignSelf: "flex-start",
+  alignSelf: "flex-start"
 }
 
 const $toggle: ViewStyle = {
-  marginTop: spacing.md,
+  marginTop: spacing.md
 }
 
 const $labelStyle: TextStyle = {
-  textAlign: "left",
+  textAlign: "left"
 }
 
 const $iconContainer: ViewStyle = {
   height: ICON_SIZE,
   width: ICON_SIZE,
   flexDirection: "row",
-  marginEnd: spacing.sm,
+  marginEnd: spacing.sm
 }
 
 const $metadata: TextStyle = {
   color: colors.textDim,
   marginTop: spacing.xs,
-  flexDirection: "row",
+  flexDirection: "row"
 }
 
 const $metadataText: TextStyle = {
   color: colors.textDim,
   marginEnd: spacing.md,
-  marginBottom: spacing.xs,
+  marginBottom: spacing.xs
 }
 
 const $favoriteButton: ViewStyle = {
@@ -364,20 +353,20 @@ const $favoriteButton: ViewStyle = {
   paddingTop: spacing.xxxs,
   paddingBottom: 0,
   minHeight: 32,
-  alignSelf: "flex-start",
+  alignSelf: "flex-start"
 }
 
 const $unFavoriteButton: ViewStyle = {
   borderColor: colors.palette.primary100,
-  backgroundColor: colors.palette.primary100,
+  backgroundColor: colors.palette.primary100
 }
 
 const $emptyState: ViewStyle = {
-  marginTop: spacing.xxl,
+  marginTop: spacing.xxl
 }
 
 const $emptyStateImage: ImageStyle = {
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
+  transform: [{ scaleX: isRTL ? -1 : 1 }]
 }
 // #endregion
 

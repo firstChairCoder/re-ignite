@@ -1,44 +1,45 @@
 /* eslint-disable react/jsx-key */
 import React from "react"
-import { TextStyle, ViewStyle } from "react-native"
+import type { TextStyle, ViewStyle } from "react-native"
+
 import { Icon, TextField } from "../../../components"
 import { colors, spacing } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
 const $customInputStyle: TextStyle = {
   backgroundColor: colors.error,
-  color: colors.palette.neutral100,
+  color: colors.palette.neutral100
 }
 
 const $customInputWrapperStyle: ViewStyle = {
   backgroundColor: colors.error,
-  borderColor: colors.palette.neutral800,
+  borderColor: colors.palette.neutral800
 }
 
 const $customContainerStyle: ViewStyle = {
-  backgroundColor: colors.error,
+  backgroundColor: colors.error
 }
 
 const $customLabelAndHelperStyle: TextStyle = {
-  color: colors.palette.neutral100,
+  color: colors.palette.neutral100
 }
 
 const $customInputWithAbsoluteAccessoriesStyle: ViewStyle = {
-  marginHorizontal: spacing.xxl,
+  marginHorizontal: spacing.xxl
 }
 
 const $customLeftAccessoryStyle: ViewStyle = {
   backgroundColor: colors.error,
   position: "absolute",
-  left: 0,
+  left: 0
 }
 
 const $customRightAccessoryStyle: ViewStyle = {
   backgroundColor: colors.error,
   position: "absolute",
-  right: 0,
+  right: 0
 }
 
 export const DemoTextField: Demo = {
@@ -188,8 +189,8 @@ export const DemoTextField: Demo = {
           />
         )}
       />
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

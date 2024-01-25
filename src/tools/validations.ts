@@ -1,26 +1,28 @@
-import { GluegunToolbox } from "gluegun"
-import { prefix } from "./pretty"
+import type { GluegunToolbox } from "gluegun";
+
+import { prefix } from "./pretty";
 
 // #region Error Guards
-type IsError = (str: string) => boolean
-type ErrorMessage = (str?: string) => string
-type ErrorGuard = [IsError, ErrorMessage]
+type IsError = (str: string) => boolean;
+type ErrorMessage = (str?: string) => string;
+type ErrorGuard = [IsError, ErrorMessage];
 
 const isIgnite: ErrorGuard = [
   (str) => str.toLowerCase() === "ignite",
-  (str) => `Hey...that's my name! Please name your project something other than '${str}'.`,
-]
+  (str) =>
+    `Hey...that's my name! Please name your project something other than '${str}'.`
+];
 const isOnlyNumbers: ErrorGuard = [
   (str) => /^\d+$/.test(str),
-  () => `Please use at least one non-numeric character for your project name`,
-]
+  () => `Please use at least one non-numeric character for your project name`
+];
 const isNotAlphaNumeric: ErrorGuard = [
   (str) => !/^[a-z_][a-z0-9_-]+$/i.test(str),
   () =>
-    `The project name can only contain alphanumeric characters and underscore, but must not begin with a number.`,
-]
+    `The project name can only contain alphanumeric characters and underscore, but must not begin with a number.`
+];
 
-const guards: ErrorGuard[] = [isIgnite, isOnlyNumbers, isNotAlphaNumeric]
+const guards: ErrorGuard[] = [isIgnite, isOnlyNumbers, isNotAlphaNumeric];
 
 /**
  * check if the value matches any of the error guards
@@ -29,19 +31,21 @@ const guards: ErrorGuard[] = [isIgnite, isOnlyNumbers, isNotAlphaNumeric]
 const validate = (value: string): true | string => {
   for (const [isError, errorMessage] of guards) {
     if (isError(value)) {
-      return errorMessage(value)
+      return errorMessage(value);
     }
   }
-  return true
-}
+  return true;
+};
 // #endregion
 
-export async function validateProjectName(toolbox: GluegunToolbox): Promise<string> {
-  const { parameters, strings, print } = toolbox
-  const { isBlank } = strings
+export async function validateProjectName(
+  toolbox: GluegunToolbox
+): Promise<string> {
+  const { parameters, strings, print } = toolbox;
+  const { isBlank } = strings;
 
   // grab the project name
-  let projectName: string = (parameters.first || "").toString()
+  let projectName: string = (parameters.first || "").toString();
 
   // verify the project name is a thing
   if (isBlank(projectName)) {
@@ -50,9 +54,9 @@ export async function validateProjectName(toolbox: GluegunToolbox): Promise<stri
       type: "input",
       message: "What do you want to call it?",
       prefix,
-      validate,
-    }))
-    projectName = projectNameResponse.projectName
+      validate
+    }));
+    projectName = projectNameResponse.projectName;
   }
 
   // warn if more than one argument is provided for <projectName>
@@ -60,43 +64,44 @@ export async function validateProjectName(toolbox: GluegunToolbox): Promise<stri
     print.info(`Info: You provided more than one argument for <projectName>. The first one (${projectName}) will be used and the rest are ignored.`) // prettier-ignore
   }
 
-  const error = validate(projectName)
+  const error = validate(projectName);
   if (typeof error === "string") {
-    print.error(error)
-    process.exit(1)
+    print.error(error);
+    process.exit(1);
   }
 
-  return projectName
+  return projectName;
 }
 
 export function validateBundleIdentifier(
   toolbox: GluegunToolbox,
-  bundleID: string | undefined,
+  bundleID: string | undefined
 ): string | undefined {
-  const { print } = toolbox
+  const { print } = toolbox;
 
   // no bundle ID provided
-  if (bundleID === undefined) return undefined
+  if (bundleID === undefined) return undefined;
 
-  const id = bundleID.split(".")
-  const validBundleID = /^([a-zA-Z]([a-zA-Z0-9_])*\.)+[a-zA-Z]([a-zA-Z0-9_])*$/u
+  const id = bundleID.split(".");
+  const validBundleID =
+    /^([a-zA-Z]([a-zA-Z0-9_])*\.)+[a-zA-Z]([a-zA-Z0-9_])*$/u;
   if (id.length < 2) {
     print.error(
-      'Invalid Bundle Identifier. Add something like "com.travelapp" or "com.junedomingo.travelapp"',
-    )
-    process.exit(1)
+      'Invalid Bundle Identifier. Add something like "com.travelapp" or "com.junedomingo.travelapp"'
+    );
+    process.exit(1);
   }
   if (!validBundleID.test(bundleID)) {
     print.error(
-      "Invalid Bundle Identifier. It must have at least two segments (one or more dots). Each segment must start with a letter. All characters must be alphanumeric or an underscore [a-zA-Z0-9_]",
-    )
-    process.exit(1)
+      "Invalid Bundle Identifier. It must have at least two segments (one or more dots). Each segment must start with a letter. All characters must be alphanumeric or an underscore [a-zA-Z0-9_]"
+    );
+    process.exit(1);
   }
 
-  return bundleID
+  return bundleID;
 }
 
 export type ValidationsExports = {
-  validateProjectName: typeof validateProjectName
-  validateBundleIdentifier: typeof validateBundleIdentifier
-}
+  validateProjectName: typeof validateProjectName;
+  validateBundleIdentifier: typeof validateBundleIdentifier;
+};

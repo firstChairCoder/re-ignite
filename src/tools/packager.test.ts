@@ -1,12 +1,12 @@
-import { list } from "./packager"
+import { list } from "./packager";
 
 describe("packager", () => {
   describe("list", () => {
     describe("npm", () => {
       it("should handle non-json input to parseFn", () => {
-        const [cmd, parseFn] = list({ packagerName: "npm" })
+        const [cmd, parseFn] = list({ packagerName: "npm" });
 
-        expect(cmd.includes("npm")).toBe(true)
+        expect(cmd.includes("npm")).toBe(true);
 
         const input = `
             npm WARN config global \`--global\`, \`--local\` are deprecated. Use \`--location=global\` instead.
@@ -25,15 +25,15 @@ describe("packager", () => {
                     }
                 }
             }
-        `
+        `;
 
-        expect(() => parseFn(input)).not.toThrow()
-      })
+        expect(() => parseFn(input)).not.toThrow();
+      });
 
       it("should handle transforming input json string to expected shape", () => {
-        const [cmd, parseFn] = list({ packagerName: "npm" })
+        const [cmd, parseFn] = list({ packagerName: "npm" });
 
-        expect(cmd.includes("npm")).toBe(true)
+        expect(cmd.includes("npm")).toBe(true);
 
         const input = `
             {
@@ -50,14 +50,14 @@ describe("packager", () => {
                     }
                 }
             }
-        `
+        `;
 
         expect(parseFn(input)).toStrictEqual([
           ["corepack", "0.10.0"],
           ["expo-cli", "6.0.1"],
-          ["npm", "8.11.0"],
-        ])
-      })
-    })
-  })
-})
+          ["npm", "8.11.0"]
+        ]);
+      });
+    });
+  });
+});

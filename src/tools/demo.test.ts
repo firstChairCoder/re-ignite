@@ -1,7 +1,11 @@
-import { demo } from "./demo"
+import { demo } from "./demo";
 
-const { REMOVE_BLOCK_START, REMOVE_BLOCK_END, REMOVE_CURRENT_LINE, REMOVE_NEXT_LINE } =
-  demo.CommentType
+const {
+  REMOVE_BLOCK_START,
+  REMOVE_BLOCK_END,
+  REMOVE_CURRENT_LINE,
+  REMOVE_NEXT_LINE
+} = demo.CommentType;
 
 describe("demo", () => {
   describe("removeCurrentLine", () => {
@@ -35,11 +39,11 @@ describe("demo", () => {
             flexGrow: 0,
             flexShrink: 0, // ${demo.CommentType.REMOVE_CURRENT_LINE}
         }
-      `
-      const result = demo.removeCurrentLine(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(demo.CommentType.REMOVE_CURRENT_LINE)
-    })
+      `;
+      const result = demo.removeCurrentLine(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(demo.CommentType.REMOVE_CURRENT_LINE);
+    });
 
     it(`should remove line with "/* ${demo.CommentType.REMOVE_CURRENT_LINE} */" comment`, () => {
       const contents = `
@@ -71,11 +75,11 @@ describe("demo", () => {
             flexGrow: 0,
             flexShrink: 0,
         }
-      `
-      const result = demo.removeCurrentLine(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(demo.CommentType.REMOVE_CURRENT_LINE)
-    })
+      `;
+      const result = demo.removeCurrentLine(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(demo.CommentType.REMOVE_CURRENT_LINE);
+    });
 
     it(`should remove line with "# ${REMOVE_CURRENT_LINE}" comment`, () => {
       const contents = `
@@ -89,12 +93,12 @@ describe("demo", () => {
       - runFlow: Login.yaml
       - tapOn: "Podcast, tab, 3 of 4"
       - assertVisible: "React Native Radio episodes"
-      `
-      const result = demo.removeCurrentLine(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(REMOVE_CURRENT_LINE)
-    })
-  })
+      `;
+      const result = demo.removeCurrentLine(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(REMOVE_CURRENT_LINE);
+    });
+  });
 
   describe("removeNextLine", () => {
     it(`should remove comment and next line after "// ${demo.CommentType.REMOVE_NEXT_LINE}"`, () => {
@@ -103,12 +107,12 @@ describe("demo", () => {
         export * from "./LoginScreen"
         // ${demo.CommentType.REMOVE_NEXT_LINE}
         export * from "./DemoCommunityScreen"
-      `
-      const result = demo.removeNextLine(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(demo.CommentType.REMOVE_NEXT_LINE)
-      expect(result).not.toContain("DemoCommunityScreen")
-    })
+      `;
+      const result = demo.removeNextLine(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(demo.CommentType.REMOVE_NEXT_LINE);
+      expect(result).not.toContain("DemoCommunityScreen");
+    });
 
     it(`should remove comment and next line after "/* ${demo.CommentType.REMOVE_NEXT_LINE} */"`, () => {
       const contents = `
@@ -116,12 +120,12 @@ describe("demo", () => {
         export * from "./LoginScreen"
         /* ${demo.CommentType.REMOVE_NEXT_LINE} */
         export * from "./DemoCommunityScreen"
-      `
-      const result = demo.removeNextLine(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(demo.CommentType.REMOVE_NEXT_LINE)
-      expect(result).not.toContain("DemoCommunityScreen")
-    })
+      `;
+      const result = demo.removeNextLine(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(demo.CommentType.REMOVE_NEXT_LINE);
+      expect(result).not.toContain("DemoCommunityScreen");
+    });
     it(`should remove comment and next line after "# ${REMOVE_NEXT_LINE}"`, () => {
       const contents = `
       # flow: run the login flow and then navigate to the demo podcast list screen, favorite a podcast, and then switch the list to only be favorites.
@@ -135,12 +139,12 @@ describe("demo", () => {
       - runFlow: Login.yaml
       - tapOn: "Podcast, tab, 3 of 4"
       - assertVisible: "React Native Radio episodes"
-      `
-      const result = demo.removeNextLine(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(REMOVE_NEXT_LINE)
-      expect(result).not.toContain("appId: com.helloworld")
-    })
+      `;
+      const result = demo.removeNextLine(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(REMOVE_NEXT_LINE);
+      expect(result).not.toContain("appId: com.helloworld");
+    });
 
     it(`should not modify other lines other than "// ${demo.CommentType.REMOVE_NEXT_LINE} and line after"`, () => {
       // simulate whitespace and new lines of file after prettier format
@@ -152,12 +156,12 @@ describe("demo", () => {
         `export * from "./DemoHeader"`,
         `// ${demo.CommentType.REMOVE_NEXT_LINE}`,
         `export * from "./DemoAutoImage"`,
-        `export * from "./DemoText"`,
-      ].join("\n")
+        `export * from "./DemoText"`
+      ].join("\n");
 
-      const result = demo.removeNextLine(contents)
-      expect(result).not.toContain(demo.CommentType.REMOVE_NEXT_LINE)
-      expect(result).not.toContain("DemoAutoImage")
+      const result = demo.removeNextLine(contents);
+      expect(result).not.toContain(demo.CommentType.REMOVE_NEXT_LINE);
+      expect(result).not.toContain("DemoAutoImage");
       expect(result).toEqual(
         [
           `export * from "./DemoIcon"`,
@@ -165,11 +169,11 @@ describe("demo", () => {
           `export * from "./DemoButton"`,
           `export * from "./DemoListItem"`,
           `export * from "./DemoHeader"`,
-          `export * from "./DemoText"`,
-        ].join("\n"),
-      )
-    })
-  })
+          `export * from "./DemoText"`
+        ].join("\n")
+      );
+    });
+  });
 
   describe("removeBlock", () => {
     it(`should remove comments and lines between "// ${demo.CommentType.REMOVE_BLOCK_START}" and "// ${demo.CommentType.REMOVE_BLOCK_END}"`, () => {
@@ -183,15 +187,15 @@ describe("demo", () => {
         // ${demo.CommentType.REMOVE_BLOCK_END}
         export * from "./ErrorScreen/ErrorBoundary"
         // export other screens here
-      `
-      const result = demo.removeBlock(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_START)
-      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_END)
-      expect(result).not.toContain("DemoCommunityScreen")
-      expect(result).not.toContain("DemoDebugScreen")
-      expect(result).not.toContain("DemoShowroomScreen")
-    })
+      `;
+      const result = demo.removeBlock(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_START);
+      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_END);
+      expect(result).not.toContain("DemoCommunityScreen");
+      expect(result).not.toContain("DemoDebugScreen");
+      expect(result).not.toContain("DemoShowroomScreen");
+    });
 
     it(`should remove comments and lines between "/* ${demo.CommentType.REMOVE_BLOCK_START} */" and "/* ${demo.CommentType.REMOVE_BLOCK_END} */"`, () => {
       const contents = `
@@ -204,15 +208,15 @@ describe("demo", () => {
         /* ${demo.CommentType.REMOVE_BLOCK_END} */
         export * from "./ErrorScreen/ErrorBoundary"
         // export other screens here
-      `
-      const result = demo.removeBlock(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_START)
-      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_END)
-      expect(result).not.toContain("DemoCommunityScreen")
-      expect(result).not.toContain("DemoDebugScreen")
-      expect(result).not.toContain("DemoShowroomScreen")
-    })
+      `;
+      const result = demo.removeBlock(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_START);
+      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_END);
+      expect(result).not.toContain("DemoCommunityScreen");
+      expect(result).not.toContain("DemoDebugScreen");
+      expect(result).not.toContain("DemoShowroomScreen");
+    });
 
     it(`should remove comments and lines between "# ${REMOVE_BLOCK_START}" and "# ${REMOVE_BLOCK_END}"`, () => {
       const contents = `
@@ -228,17 +232,17 @@ describe("demo", () => {
       - runFlow: Login.yaml
       - tapOn: "Podcast, tab, 3 of 4"
       - assertVisible: "React Native Radio episodes"
-      `
-      const result = demo.removeBlock(contents)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(REMOVE_BLOCK_START)
-      expect(result).not.toContain(REMOVE_BLOCK_END)
-      expect(result).not.toContain("# flow")
-      expect(result).not.toContain("appId: com.helloworld")
-      expect(result).not.toContain("env:")
-      expect(result).not.toContain("TITLE:")
-      expect(result).not.toContain("FAVORITES_TEXT:")
-    })
+      `;
+      const result = demo.removeBlock(contents);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(REMOVE_BLOCK_START);
+      expect(result).not.toContain(REMOVE_BLOCK_END);
+      expect(result).not.toContain("# flow");
+      expect(result).not.toContain("appId: com.helloworld");
+      expect(result).not.toContain("env:");
+      expect(result).not.toContain("TITLE:");
+      expect(result).not.toContain("FAVORITES_TEXT:");
+    });
 
     it(`should remove multiple "// ${demo.CommentType.REMOVE_BLOCK_START}" and "// ${demo.CommentType.REMOVE_BLOCK_END}" sections in the same file string`, () => {
       const contents: string = [
@@ -252,52 +256,52 @@ describe("demo", () => {
         `export * from "./DemoShowroomScreen/DemoShowroomScreen"`,
         `// ${REMOVE_BLOCK_END}`,
         `export * from "./ErrorScreen/ErrorBoundary"`,
-        `// export other screens here'`,
-      ].join("\n")
+        `// export other screens here'`
+      ].join("\n");
 
-      const result = demo.removeBlock(contents)
+      const result = demo.removeBlock(contents);
 
       expect(result).toEqual(
         [
           `export * from "./WelcomeScreen"`,
           `export * from "./ErrorScreen/ErrorBoundary"`,
-          `// export other screens here'`,
-        ].join("\n"),
-      )
-      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_START)
-      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_END)
-    })
-  })
+          `// export other screens here'`
+        ].join("\n")
+      );
+      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_START);
+      expect(result).not.toContain(demo.CommentType.REMOVE_BLOCK_END);
+    });
+  });
 
   describe("remove", () => {
     it("should remove all comments in WelcomeScreen", () => {
-      const result = demo.remove(WelcomeScreen)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(REMOVE_BLOCK_START)
-      expect(result).not.toContain(REMOVE_BLOCK_END)
-      expect(result).not.toContain(REMOVE_CURRENT_LINE)
+      const result = demo.remove(WelcomeScreen);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(REMOVE_BLOCK_START);
+      expect(result).not.toContain(REMOVE_BLOCK_END);
+      expect(result).not.toContain(REMOVE_CURRENT_LINE);
       expect(result).not.toContain(
-        /* jsx */ `<Button preset="reversed" tx="welcomeScreen.letsGo" onPress={goNext} />`,
-      )
-      expect(result).not.toContain(`props: WelcomeScreenProps`)
-      expect(result).not.toContain(`goNext()`)
-    })
+        /* jsx */ `<Button preset="reversed" tx="welcomeScreen.letsGo" onPress={goNext} />`
+      );
+      expect(result).not.toContain(`props: WelcomeScreenProps`);
+      expect(result).not.toContain(`goNext()`);
+    });
 
     it("should remove all comments in AppNavigator", () => {
-      const result = demo.remove(AppNavigator)
-      expect(result).toMatchSnapshot()
-      expect(result).not.toContain(REMOVE_BLOCK_START)
-      expect(result).not.toContain(REMOVE_BLOCK_END)
-      expect(result).not.toContain(REMOVE_CURRENT_LINE)
-      expect(result).not.toContain(`NavigatorScreenParams`)
-      expect(result).not.toContain(`import { useStores } from "../models"`)
+      const result = demo.remove(AppNavigator);
+      expect(result).toMatchSnapshot();
+      expect(result).not.toContain(REMOVE_BLOCK_START);
+      expect(result).not.toContain(REMOVE_BLOCK_END);
+      expect(result).not.toContain(REMOVE_CURRENT_LINE);
+      expect(result).not.toContain(`NavigatorScreenParams`);
+      expect(result).not.toContain(`import { useStores } from "../models"`);
       expect(result).not.toContain(
-        `import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" "`,
-      )
-      expect(result).not.toContain(") : (")
-    })
-  })
-})
+        `import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" "`
+      );
+      expect(result).not.toContain(") : (");
+    });
+  });
+});
 
 const WelcomeScreen = /* jsx */ `
 import { observer } from "mobx-react-lite"
@@ -401,7 +405,7 @@ const $welcomeFace: ImageStyle = {
 const $welcomeHeading: TextStyle = {
   marginBottom: spacing.medium,
 }
-`
+`;
 const AppNavigator = /* jsx */ `
 /**
  * The app navigator (formerly "AppNavigator" and "MainNavigator") is used for the primary
@@ -509,4 +513,4 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
     </NavigationContainer>
   )
 })
-`
+`;

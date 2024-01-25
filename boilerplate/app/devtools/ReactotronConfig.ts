@@ -3,14 +3,12 @@
  * free desktop app for inspecting and debugging your React Native app.
  * @see https://github.com/infinitered/reactotron
  */
-import { Platform, NativeModules } from "react-native"
-
+import { NativeModules, Platform } from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ArgType } from "reactotron-core-client"
 import { mst } from "reactotron-mst"
-
 import { clear } from "app/utils/storage"
-import { goBack, resetRoot, navigate } from "app/navigators/navigationUtilities"
+import { goBack, navigate, resetRoot } from "app/navigators/navigationUtilities"
 
 import { Reactotron } from "./ReactotronClient"
 
@@ -19,20 +17,20 @@ const reactotron = Reactotron.configure({
   onConnect: () => {
     /** since this file gets hot reloaded, let's clear the past logs every time we connect */
     Reactotron.clear()
-  },
+  }
 }).use(
   mst({
     /** ignore some chatty `mobx-state-tree` actions  */
-    filter: (event) => /postProcessSnapshot|@APPLY_SNAPSHOT/.test(event.name) === false,
-  }),
+    filter: (event) => /postProcessSnapshot|@APPLY_SNAPSHOT/.test(event.name) === false
+  })
 )
 
 if (Platform.OS !== "web") {
   reactotron.setAsyncStorageHandler?.(AsyncStorage)
   reactotron.useReactNative({
     networking: {
-      ignoreUrls: /symbolicate/,
-    },
+      ignoreUrls: /symbolicate/
+    }
   })
 }
 
@@ -54,7 +52,7 @@ reactotron.onCustomCommand({
   handler: () => {
     Reactotron.log("Showing React Native dev menu")
     NativeModules.DevMenu.show()
-  },
+  }
 })
 
 reactotron.onCustomCommand({
@@ -64,7 +62,7 @@ reactotron.onCustomCommand({
   handler: () => {
     Reactotron.log("resetting store")
     clear()
-  },
+  }
 })
 
 reactotron.onCustomCommand({
@@ -74,7 +72,7 @@ reactotron.onCustomCommand({
   handler: () => {
     Reactotron.log("resetting navigation state")
     resetRoot({ index: 0, routes: [] })
-  },
+  }
 })
 
 reactotron.onCustomCommand<[{ name: "route"; type: ArgType.String }]>({
@@ -90,7 +88,7 @@ reactotron.onCustomCommand<[{ name: "route"; type: ArgType.String }]>({
   },
   title: "Navigate To Screen",
   description: "Navigates to a screen by name.",
-  args: [{ name: "route", type: ArgType.String }],
+  args: [{ name: "route", type: ArgType.String }]
 })
 
 reactotron.onCustomCommand({
@@ -100,7 +98,7 @@ reactotron.onCustomCommand({
   handler: () => {
     Reactotron.log("Going back")
     goBack()
-  },
+  }
 })
 
 /**

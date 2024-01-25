@@ -5,16 +5,18 @@
  * See the [Backend API Integration](https://github.com/infinitered/ignite/blob/master/docs/Backend-API-Integration.md)
  * documentation for more details.
  */
-import {
+import type {
   ApiResponse, // @demo remove-current-line
-  ApisauceInstance,
-  create,
+  ApisauceInstance
 } from "apisauce"
+import { create } from "apisauce"
+
 import Config from "../../config"
-import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem" // @demo remove-current-line
+import type { GeneralApiProblem } from "./apiProblem"
+import { getGeneralApiProblem } from "./apiProblem" // @demo remove-current-line
 import type {
   ApiConfig,
-  ApiFeedResponse, // @demo remove-current-line
+  ApiFeedResponse // @demo remove-current-line
 } from "./api.types"
 import type { EpisodeSnapshotIn } from "../../models/Episode" // @demo remove-current-line
 
@@ -23,7 +25,7 @@ import type { EpisodeSnapshotIn } from "../../models/Episode" // @demo remove-cu
  */
 export const DEFAULT_API_CONFIG: ApiConfig = {
   url: Config.API_URL,
-  timeout: 10000,
+  timeout: 10000
 }
 
 /**
@@ -43,8 +45,8 @@ export class Api {
       baseURL: this.config.url,
       timeout: this.config.timeout,
       headers: {
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
   }
 
@@ -55,7 +57,7 @@ export class Api {
   async getEpisodes(): Promise<{ kind: "ok"; episodes: EpisodeSnapshotIn[] } | GeneralApiProblem> {
     // make the api call
     const response: ApiResponse<ApiFeedResponse> = await this.apisauce.get(
-      `api.json?rss_url=https%3A%2F%2Ffeeds.simplecast.com%2FhEI_f9Dx`,
+      `api.json?rss_url=https%3A%2F%2Ffeeds.simplecast.com%2FhEI_f9Dx`
     )
 
     // the typical ways to die when calling an api
@@ -71,7 +73,7 @@ export class Api {
       // This is where we transform the data into the shape we expect for our MST model.
       const episodes: EpisodeSnapshotIn[] =
         rawData?.items.map((raw) => ({
-          ...raw,
+          ...raw
         })) ?? []
 
       return { kind: "ok", episodes }

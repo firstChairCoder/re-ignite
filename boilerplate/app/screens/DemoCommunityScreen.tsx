@@ -1,7 +1,10 @@
-import React, { FC } from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import type { FC } from "react"
+import React from "react"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { Image, View } from "react-native"
+
 import { ListItem, Screen, Text } from "../components"
-import { DemoTabScreenProps } from "../navigators/DemoNavigator"
+import type { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
@@ -102,35 +105,35 @@ export const DemoCommunityScreen: FC<DemoTabScreenProps<"DemoCommunity">> =
 
 const $container: ViewStyle = {
   paddingTop: spacing.lg + spacing.xl,
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $title: TextStyle = {
-  marginBottom: spacing.sm,
+  marginBottom: spacing.sm
 }
 
 const $tagline: TextStyle = {
-  marginBottom: spacing.xxl,
+  marginBottom: spacing.xxl
 }
 
 const $description: TextStyle = {
-  marginBottom: spacing.lg,
+  marginBottom: spacing.lg
 }
 
 const $sectionTitle: TextStyle = {
-  marginTop: spacing.xxl,
+  marginTop: spacing.xxl
 }
 
 const $logoContainer: ViewStyle = {
   marginEnd: spacing.md,
   flexDirection: "row",
   flexWrap: "wrap",
-  alignContent: "center",
+  alignContent: "center"
 }
 
 const $logo: ImageStyle = {
   height: 38,
-  width: 38,
+  width: 38
 }
 
 // @demo remove-file

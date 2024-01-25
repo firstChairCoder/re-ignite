@@ -1,17 +1,16 @@
-import React, { ReactElement } from "react"
-import {
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View,
-  ViewStyle,
-} from "react-native"
+import type { ReactElement } from "react"
+import React from "react"
+import type { StyleProp, TextStyle, TouchableOpacityProps, ViewStyle } from "react-native"
+import { TouchableOpacity, View } from "react-native"
+
 import { isRTL, translate } from "../i18n"
 import { colors, spacing } from "../theme"
-import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
-import { Icon, IconTypes } from "./Icon"
-import { Text, TextProps } from "./Text"
+import type { ExtendedEdge } from "../utils/useSafeAreaInsetsStyle"
+import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
+import type { IconTypes } from "./Icon"
+import { Icon } from "./Icon"
+import type { TextProps } from "./Text"
+import { Text } from "./Text"
 
 export interface HeaderProps {
   /**
@@ -167,7 +166,7 @@ export function Header(props: HeaderProps) {
     titleContainerStyle: $titleContainerStyleOverride,
     style: $styleOverride,
     titleStyle: $titleStyleOverride,
-    containerStyle: $containerStyleOverride,
+    containerStyle: $containerStyleOverride
   } = props
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
@@ -193,7 +192,7 @@ export function Header(props: HeaderProps) {
             style={[
               titleMode === "center" && $titleWrapperCenter,
               titleMode === "flex" && $titleWrapperFlex,
-              $titleContainerStyleOverride,
+              $titleContainerStyleOverride
             ]}
             pointerEvents="none"
           >
@@ -261,15 +260,15 @@ const $wrapper: ViewStyle = {
   height: 56,
   flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "space-between"
 }
 
 const $container: ViewStyle = {
-  width: "100%",
+  width: "100%"
 }
 
 const $title: TextStyle = {
-  textAlign: "center",
+  textAlign: "center"
 }
 
 const $actionTextContainer: ViewStyle = {
@@ -278,11 +277,11 @@ const $actionTextContainer: ViewStyle = {
   justifyContent: "center",
   height: "100%",
   paddingHorizontal: spacing.md,
-  zIndex: 2,
+  zIndex: 2
 }
 
 const $actionText: TextStyle = {
-  color: colors.tint,
+  color: colors.tint
 }
 
 const $actionIconContainer: ViewStyle = {
@@ -291,11 +290,11 @@ const $actionIconContainer: ViewStyle = {
   justifyContent: "center",
   height: "100%",
   paddingHorizontal: spacing.md,
-  zIndex: 2,
+  zIndex: 2
 }
 
 const $actionFillerContainer: ViewStyle = {
-  width: 16,
+  width: 16
 }
 
 const $titleWrapperCenter: ViewStyle = {
@@ -305,10 +304,10 @@ const $titleWrapperCenter: ViewStyle = {
   width: "100%",
   position: "absolute",
   paddingHorizontal: spacing.xxl,
-  zIndex: 1,
+  zIndex: 1
 }
 
 const $titleWrapperFlex: ViewStyle = {
   justifyContent: "center",
-  flexGrow: 1,
+  flexGrow: 1
 }

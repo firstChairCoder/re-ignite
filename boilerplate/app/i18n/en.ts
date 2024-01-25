@@ -3,32 +3,32 @@ const en = {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
-    logOut: "Log Out", // @demo remove-current-line
+    logOut: "Log Out" // @demo remove-current-line
   },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
     readyForLaunch: "Your app, almost ready for launch!",
     exciting: "(ohh, this is exciting!)",
-    letsGo: "Let's go!", // @demo remove-current-line
+    letsGo: "Let's go!" // @demo remove-current-line
   },
   errorScreen: {
     title: "Something went wrong!",
     friendlySubtitle:
       "This is the screen that your users will see in production when an error is thrown. You'll want to customize this message (located in `app/i18n/en.ts`) and probably the layout as well (`app/screens/ErrorScreen`). If you want to remove this entirely, check `app/app.tsx` for the <ErrorBoundary> component.",
     reset: "RESET APP",
-    traceTitle: "Error from %{name} stack", // @demo remove-current-line
+    traceTitle: "Error from %{name} stack" // @demo remove-current-line
   },
   emptyStateComponent: {
     generic: {
       heading: "So empty... so sad",
       content: "No data found yet. Try clicking the button to refresh or reload the app.",
-      button: "Let's try this again",
-    },
+      button: "Let's try this again"
+    }
   },
   // @demo remove-block-start
   errors: {
-    invalidEmail: "Invalid email address.",
+    invalidEmail: "Invalid email address."
   },
   loginScreen: {
     signIn: "Sign In",
@@ -39,13 +39,13 @@ const en = {
     emailFieldPlaceholder: "Enter your email address",
     passwordFieldPlaceholder: "Super secret password here",
     tapToSignIn: "Tap to sign in!",
-    hint: "Hint: you can use any email address and your favorite password :)",
+    hint: "Hint: you can use any email address and your favorite password :)"
   },
   demoNavigator: {
     componentsTab: "Components",
     debugTab: "Debug",
     communityTab: "Community",
-    podcastListTab: "Podcast",
+    podcastListTab: "Podcast"
   },
   demoCommunityScreen: {
     title: "Connect with the community",
@@ -68,7 +68,7 @@ const en = {
     hireUsTitle: "Hire Infinite Red for your next project",
     hireUs:
       "Whether it's running a full project or getting teams up to speed with our hands-on training, Infinite Red can help with just about any React Native project.",
-    hireUsLink: "Send us a message",
+    hireUsLink: "Send us a message"
   },
   demoShowroomScreen: {
     jumpStart: "Components to jump start your project!",
@@ -76,7 +76,7 @@ const en = {
       "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
     demoHeaderTxExample: "Yay",
     demoViaTxProp: "Via `tx` Prop",
-    demoViaSpecifiedTxProp: "Via `{{prop}}Tx` Prop",
+    demoViaSpecifiedTxProp: "Via `{{prop}}Tx` Prop"
   },
   demoDebugScreen: {
     howTo: "HOW TO",
@@ -96,7 +96,7 @@ const en = {
     webReactotronHint:
       "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
     windowsReactotronHint:
-      "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+      "If this doesn't work, ensure the Reactotron desktop app is running and reload app."
   },
   demoPodcastListScreen: {
     title: "React Native Radio episodes",
@@ -111,14 +111,14 @@ const en = {
       favoriteIcon: "Episode not favorited",
       unfavoriteIcon: "Episode favorited",
       publishLabel: "Published {{date}}",
-      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds"
     },
     noFavoritesEmptyState: {
       heading: "This looks a bit empty",
       content:
-        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
-    },
-  },
+        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!"
+    }
+  }
   // @demo remove-block-end
 }
 

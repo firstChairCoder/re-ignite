@@ -1,14 +1,16 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
-import { TextStyle, View, ViewStyle } from "react-native"
+import type { TextStyle, ViewStyle } from "react-native"
+import { View } from "react-native"
+
 import { Header, Icon } from "../../../components"
 import { colors } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
 const $rightAlignTitle: TextStyle = {
-  textAlign: "right",
+  textAlign: "right"
 }
 
 const $customLeftAction: ViewStyle = {
@@ -18,14 +20,14 @@ const $customLeftAction: ViewStyle = {
   height: "100%",
   flexDirection: "row",
   flexWrap: "wrap",
-  overflow: "hidden",
+  overflow: "hidden"
 }
 
 const $customTitle: TextStyle = {
   textDecorationLine: "underline line-through",
   textDecorationStyle: "dashed",
   color: colors.error,
-  textDecorationColor: colors.error,
+  textDecorationColor: colors.error
 }
 
 const $customWhiteTitle: TextStyle = { color: colors.palette.neutral100 }
@@ -112,8 +114,8 @@ export const DemoHeader: Demo = {
         leftIconColor={colors.palette.neutral100}
         safeAreaEdges={[]}
       />
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

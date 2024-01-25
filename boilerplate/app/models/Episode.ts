@@ -1,4 +1,6 @@
-import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree"
+import type { Instance, SnapshotIn, SnapshotOut } from "mobx-state-tree"
+import { types } from "mobx-state-tree"
+
 import { withSetPropAction } from "./helpers/withSetPropAction"
 import { formatDate } from "../utils/formatDate"
 import { translate } from "../i18n"
@@ -26,7 +28,7 @@ export const EpisodeModel = types
     description: "",
     content: "",
     enclosure: types.frozen<Enclosure>(),
-    categories: types.array(types.string),
+    categories: types.array(types.string)
   })
   .actions(withSetPropAction)
   .views((episode) => ({
@@ -47,8 +49,8 @@ export const EpisodeModel = types
         return {
           textLabel: formatted,
           accessibilityLabel: translate("demoPodcastListScreen.accessibility.publishLabel", {
-            date: formatted,
-          }),
+            date: formatted
+          })
         }
       } catch (error) {
         return { textLabel: "", accessibilityLabel: "" }
@@ -68,14 +70,14 @@ export const EpisodeModel = types
         accessibilityLabel: translate("demoPodcastListScreen.accessibility.durationLabel", {
           hours: h,
           minutes: m,
-          seconds: s,
-        }),
+          seconds: s
+        })
       }
-    },
+    }
   }))
 
-export interface Episode extends Instance<typeof EpisodeModel> {}
-export interface EpisodeSnapshotOut extends SnapshotOut<typeof EpisodeModel> {}
-export interface EpisodeSnapshotIn extends SnapshotIn<typeof EpisodeModel> {}
+export type Episode = Instance<typeof EpisodeModel>
+export type EpisodeSnapshotOut = SnapshotOut<typeof EpisodeModel>
+export type EpisodeSnapshotIn = SnapshotIn<typeof EpisodeModel>
 
 // @demo remove-file

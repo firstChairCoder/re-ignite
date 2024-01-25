@@ -8,8 +8,8 @@ export const expoGoCompatExpectedVersions = {
   "expo-application": "~5.3.0",
   "expo-font": "~11.4.0",
   "expo-localization": "~14.3.0",
-  "react-native": "0.72.6",
-}
+  "react-native": "0.72.6"
+};
 
 // This function takes a package.json file as a string and updates the versions of the
 // dependencies specified in expoGoCompatExpectedVersions to the values in that object
@@ -17,18 +17,24 @@ export const expoGoCompatExpectedVersions = {
 // This function is used when generating a new project using Expo Go.
 export function findAndUpdateDependencyVersions(
   packageJsonRaw: string,
-  dependencies: Record<string, string>,
+  dependencies: Record<string, string>
 ): string {
-  let updatedPackageJson = packageJsonRaw
+  let updatedPackageJson = packageJsonRaw;
 
   Object.keys(dependencies).forEach((depName) => {
-    const desiredVersion = dependencies[depName]
-    const regex = new RegExp(`"${depName}"\\s*:\\s*"[^"]+"`, "g")
-    updatedPackageJson = updatedPackageJson.replace(regex, `"${depName}": "${desiredVersion}"`)
-  })
+    const desiredVersion = dependencies[depName];
+    const regex = new RegExp(`"${depName}"\\s*:\\s*"[^"]+"`, "g");
+    updatedPackageJson = updatedPackageJson.replace(
+      regex,
+      `"${depName}": "${desiredVersion}"`
+    );
+  });
 
   // Make sure `expo-dev-client` is removed
-  updatedPackageJson = updatedPackageJson.replace(/"expo-dev-client"\s*:\s*"[^"]+",?/g, "")
+  updatedPackageJson = updatedPackageJson.replace(
+    /"expo-dev-client"\s*:\s*"[^"]+",?/g,
+    ""
+  );
 
-  return updatedPackageJson
+  return updatedPackageJson;
 }

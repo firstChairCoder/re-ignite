@@ -1,8 +1,11 @@
-import React, { FC } from "react"
+import type { FC } from "react"
+import React from "react"
 import * as Application from "expo-application"
-import { Linking, Platform, TextStyle, View, ViewStyle } from "react-native"
+import type { TextStyle, ViewStyle } from "react-native"
+import { Linking, Platform, View } from "react-native"
+
 import { Button, ListItem, Screen, Text } from "../components"
-import { DemoTabScreenProps } from "../navigators/DemoNavigator"
+import type { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
 import { useStores } from "../models"
@@ -12,10 +15,10 @@ function openLinkInBrowser(url: string) {
 }
 
 export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function DemoDebugScreen(
-  _props,
+  _props
 ) {
   const {
-    authenticationStore: { logout },
+    authenticationStore: { logout }
   } = useStores()
 
   const usingHermes = typeof HermesInternal === "object" && HermesInternal !== null
@@ -32,13 +35,13 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
             appName: Application.applicationName,
             appVersion: Application.nativeApplicationVersion,
             appBuildVersion: Application.nativeBuildVersion,
-            hermesEnabled: usingHermes,
+            hermesEnabled: usingHermes
           },
-          important: true,
+          important: true
         })
       }
     },
-    [],
+    []
   )
 
   return (
@@ -113,40 +116,40 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
 const $container: ViewStyle = {
   paddingTop: spacing.lg + spacing.xl,
   paddingBottom: spacing.xxl,
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $title: TextStyle = {
-  marginBottom: spacing.xxl,
+  marginBottom: spacing.xxl
 }
 
 const $reportBugsLink: TextStyle = {
   color: colors.tint,
   marginBottom: spacing.lg,
-  alignSelf: isRTL ? "flex-start" : "flex-end",
+  alignSelf: isRTL ? "flex-start" : "flex-end"
 }
 
 const $item: ViewStyle = {
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }
 
 const $itemsContainer: ViewStyle = {
-  marginBottom: spacing.xl,
+  marginBottom: spacing.xl
 }
 
 const $button: ViewStyle = {
-  marginBottom: spacing.xs,
+  marginBottom: spacing.xs
 }
 
 const $buttonContainer: ViewStyle = {
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }
 
 const $hint: TextStyle = {
   color: colors.palette.neutral600,
   fontSize: 12,
   lineHeight: 15,
-  paddingBottom: spacing.lg,
+  paddingBottom: spacing.lg
 }
 
 // @demo remove-file

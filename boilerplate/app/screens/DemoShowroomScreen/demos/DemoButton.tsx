@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-key */
 import React from "react"
-import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { View } from "react-native"
+
 import { Button, Icon, Text } from "../../../components"
 import { colors, typography } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
@@ -14,7 +16,7 @@ const $customButtonTextStyle: TextStyle = {
   color: colors.error,
   fontFamily: typography.primary.bold,
   textDecorationLine: "underline",
-  textDecorationColor: colors.error,
+  textDecorationColor: colors.error
 }
 const $customButtonPressedTextStyle: TextStyle = { color: colors.palette.neutral100 }
 const $customButtonRightAccessoryStyle: ViewStyle = {
@@ -23,14 +25,14 @@ const $customButtonRightAccessoryStyle: ViewStyle = {
   backgroundColor: colors.error,
   position: "absolute",
   top: 0,
-  right: 0,
+  right: 0
 }
 const $customButtonPressedRightAccessoryStyle: ImageStyle = { tintColor: colors.palette.neutral100 }
 
 const $disabledOpacity: ViewStyle = { opacity: 0.5 }
 const $disabledButtonTextStyle: TextStyle = {
   color: colors.palette.neutral100,
-  textDecorationColor: colors.palette.neutral100,
+  textDecorationColor: colors.palette.neutral100
 }
 
 export const DemoButton: Demo = {
@@ -133,7 +135,7 @@ export const DemoButton: Demo = {
             containerStyle={props.style}
             style={[
               $iconStyle,
-              props.pressableState.pressed && $customButtonPressedRightAccessoryStyle,
+              props.pressableState.pressed && $customButtonPressedRightAccessoryStyle
             ]}
             icon="ladybug"
           />
@@ -206,8 +208,8 @@ export const DemoButton: Demo = {
       >
         Disabled text style
       </Button>
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

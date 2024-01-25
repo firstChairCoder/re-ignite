@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 /**
  * Welcome to the main entry point of the app. In this file, we'll
  * be kicking off our app.
@@ -14,6 +13,7 @@ if (__DEV__) {
   // Load Reactotron configuration in development. We don't want to
   // include this in our production bundle, so we are using `if (__DEV__)`
   // to only execute this in development.
+  // eslint-disable-next-line import/extensions
   require("./devtools/ReactotronConfig.ts")
 }
 import "./i18n"
@@ -22,15 +22,16 @@ import { useFonts } from "expo-font"
 import React from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import * as Linking from "expo-linking"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
+import type { ViewStyle } from "react-native"
+import { Provider as StoreProvider } from "react-redux"
+
 import { useInitialRootStore } from "./models"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import Config from "./config"
-import { GestureHandlerRootView } from "react-native-gesture-handler"
-import { ViewStyle } from "react-native"
-import { Provider as StoreProvider } from "react-redux"
 import { store } from "./store"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -40,20 +41,20 @@ const prefix = Linking.createURL("/")
 const config = {
   screens: {
     Login: {
-      path: "",
+      path: ""
     },
     Welcome: "welcome",
     Demo: {
       screens: {
         DemoShowroom: {
-          path: "showroom/:queryIndex?/:itemIndex?",
+          path: "showroom/:queryIndex?/:itemIndex?"
         },
         DemoDebug: "debug",
         DemoPodcastList: "podcast",
-        DemoCommunity: "community",
-      },
-    },
-  },
+        DemoCommunity: "community"
+      }
+    }
+  }
 }
 
 interface AppProps {
@@ -68,7 +69,7 @@ function App(props: AppProps) {
   const {
     initialNavigationState,
     onNavigationStateChange,
-    isRestored: isNavigationStateRestored,
+    isRestored: isNavigationStateRestored
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   const [areFontsLoaded] = useFonts(customFontsToLoad)
@@ -93,7 +94,7 @@ function App(props: AppProps) {
 
   const linking = {
     prefixes: [prefix],
-    config,
+    config
   }
 
   // otherwise, we're ready to render the app
@@ -102,13 +103,12 @@ function App(props: AppProps) {
       <ErrorBoundary catchErrors={Config.catchErrors}>
         <GestureHandlerRootView style={$container}>
           <StoreProvider store={store}>
-          <AppNavigator
-            linking={linking}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+            <AppNavigator
+              linking={linking}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
           </StoreProvider>
-          
         </GestureHandlerRootView>
       </ErrorBoundary>
     </SafeAreaProvider>
@@ -118,5 +118,5 @@ function App(props: AppProps) {
 export default App
 
 const $container: ViewStyle = {
-  flex: 1,
+  flex: 1
 }

@@ -1,9 +1,12 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
-import { TextStyle, View, ViewStyle } from "react-native"
-import { Text, Toggle, ToggleProps } from "../../../components"
+import type { TextStyle, ViewStyle } from "react-native"
+import { View } from "react-native"
+
+import type { ToggleProps } from "../../../components"
+import { Text, Toggle } from "../../../components"
 import { colors, spacing } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
@@ -15,12 +18,12 @@ function ControlledToggle(props: ToggleProps) {
 const $centeredOneThirdCol: ViewStyle = {
   width: "33.33333%",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "center"
 }
 const $centeredText: TextStyle = {
   textAlign: "center",
   width: "100%",
-  marginTop: spacing.xs,
+  marginTop: spacing.xs
 }
 
 export const DemoToggle: Demo = {
@@ -196,7 +199,7 @@ export const DemoToggle: Demo = {
           width: 50,
           height: 50,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
       />
       <ControlledToggle
@@ -207,7 +210,7 @@ export const DemoToggle: Demo = {
           height: 50,
           borderRadius: 25,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
       />
       <ControlledToggle
@@ -218,7 +221,7 @@ export const DemoToggle: Demo = {
           height: 50,
           borderRadius: 25,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
       />
       <Text preset="formHelper" style={$centeredText}>
@@ -235,10 +238,10 @@ export const DemoToggle: Demo = {
           width: 50,
           height: 50,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
         inputInnerStyle={{
-          backgroundColor: colors.palette.accent500,
+          backgroundColor: colors.palette.accent500
         }}
       />
       <ControlledToggle
@@ -250,10 +253,10 @@ export const DemoToggle: Demo = {
           height: 50,
           borderRadius: 25,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
         inputInnerStyle={{
-          backgroundColor: colors.palette.accent500,
+          backgroundColor: colors.palette.accent500
         }}
       />
       <ControlledToggle
@@ -265,12 +268,12 @@ export const DemoToggle: Demo = {
           height: 50,
           borderRadius: 25,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
         inputInnerStyle={{
           backgroundColor: colors.palette.accent500,
           paddingLeft: 10,
-          paddingRight: 10,
+          paddingRight: 10
         }}
       />
       <Text preset="formHelper" style={$centeredText}>
@@ -288,15 +291,15 @@ export const DemoToggle: Demo = {
           width: 50,
           height: 50,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
         inputInnerStyle={{
-          backgroundColor: colors.palette.accent500,
+          backgroundColor: colors.palette.accent500
         }}
         inputDetailStyle={{
           tintColor: colors.tint,
           height: 35,
-          width: 35,
+          width: 35
         }}
       />
       <ControlledToggle
@@ -308,16 +311,16 @@ export const DemoToggle: Demo = {
           height: 50,
           borderRadius: 25,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
         inputInnerStyle={{
-          backgroundColor: colors.palette.accent500,
+          backgroundColor: colors.palette.accent500
         }}
         inputDetailStyle={{
           backgroundColor: colors.tint,
           height: 36,
           width: 36,
-          borderRadius: 18,
+          borderRadius: 18
         }}
       />
 
@@ -330,18 +333,18 @@ export const DemoToggle: Demo = {
           height: 50,
           borderRadius: 25,
           backgroundColor: colors.palette.accent300,
-          borderColor: colors.palette.accent500,
+          borderColor: colors.palette.accent500
         }}
         inputInnerStyle={{
           backgroundColor: colors.tint,
           paddingLeft: 10,
-          paddingRight: 10,
+          paddingRight: 10
         }}
         inputDetailStyle={{
           backgroundColor: colors.palette.accent300,
           height: 36,
           width: 18,
-          borderRadius: 36,
+          borderRadius: 36
         }}
         switchAccessibilityMode="icon"
       />
@@ -362,7 +365,7 @@ export const DemoToggle: Demo = {
           labelStyle={{
             backgroundColor: colors.error,
             color: colors.palette.neutral100,
-            paddingHorizontal: 5,
+            paddingHorizontal: 5
           }}
         />
       </View>
@@ -380,8 +383,8 @@ export const DemoToggle: Demo = {
           labelStyle={{ color: colors.palette.neutral100 }}
         />
       </View>
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

@@ -1,37 +1,37 @@
-import { Translations } from "./en"
+import type { Translations } from "./en"
 
 const fr: Translations = {
   common: {
     ok: "OK !",
     cancel: "Annuler",
     back: "Retour",
-    logOut: "Déconnexion", // @demo remove-current-line
+    logOut: "Déconnexion" // @demo remove-current-line
   },
   welcomeScreen: {
     postscript:
       "psst  — Ce n'est probablement pas à quoi ressemble votre application. (À moins que votre designer ne vous ait donné ces écrans, dans ce cas, mettez la en prod !)",
     readyForLaunch: "Votre application, presque prête pour le lancement !",
     exciting: "(ohh, c'est excitant !)",
-    letsGo: "Allons-y !", // @demo remove-current-line
+    letsGo: "Allons-y !" // @demo remove-current-line
   },
   errorScreen: {
     title: "Quelque chose s'est mal passé !",
     friendlySubtitle:
       "C'est l'écran que vos utilisateurs verront en production lorsqu'une erreur sera lancée. Vous voudrez personnaliser ce message (situé dans `app/i18n/fr.ts`) et probablement aussi la mise en page (`app/screens/ErrorScreen`). Si vous voulez le supprimer complètement, vérifiez `app/app.tsx` pour le composant <ErrorBoundary>.",
     reset: "RÉINITIALISER L'APPLICATION",
-    traceTitle: "Erreur depuis %{name}", // @demo remove-current-line
+    traceTitle: "Erreur depuis %{name}" // @demo remove-current-line
   },
   emptyStateComponent: {
     generic: {
       heading: "Si vide... si triste",
       content:
         "Aucune donnée trouvée pour le moment. Essayez de cliquer sur le bouton pour rafraîchir ou recharger l'application.",
-      button: "Essayons à nouveau",
-    },
+      button: "Essayons à nouveau"
+    }
   },
   // @demo remove-block-start
   errors: {
-    invalidEmail: "Adresse e-mail invalide.",
+    invalidEmail: "Adresse e-mail invalide."
   },
   loginScreen: {
     signIn: "Se connecter",
@@ -42,13 +42,13 @@ const fr: Translations = {
     emailFieldPlaceholder: "Entrez votre adresse e-mail",
     passwordFieldPlaceholder: "Mot de passe super secret ici",
     tapToSignIn: "Appuyez pour vous connecter !",
-    hint: "Astuce : vous pouvez utiliser n'importe quelle adresse e-mail et votre mot de passe préféré :)",
+    hint: "Astuce : vous pouvez utiliser n'importe quelle adresse e-mail et votre mot de passe préféré :)"
   },
   demoNavigator: {
     componentsTab: "Composants",
     debugTab: "Débogage",
     communityTab: "Communauté",
-    podcastListTab: "Podcasts",
+    podcastListTab: "Podcasts"
   },
   demoCommunityScreen: {
     title: "Connectez-vous avec la communauté",
@@ -72,7 +72,7 @@ const fr: Translations = {
     hireUsTitle: "Engagez Infinite Red pour votre prochain projet",
     hireUs:
       "Que ce soit pour gérer un projet complet ou pour former des équipes à notre formation pratique, Infinite Red peut vous aider pour presque tous les projets React Native.",
-    hireUsLink: "Envoyez-nous un message",
+    hireUsLink: "Envoyez-nous un message"
   },
   demoShowroomScreen: {
     jumpStart: "Composants pour démarrer votre projet !",
@@ -80,7 +80,7 @@ const fr: Translations = {
       "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
     demoHeaderTxExample: "Yay",
     demoViaTxProp: "Via la propriété `tx`",
-    demoViaSpecifiedTxProp: "Via la propriété `{{prop}}Tx` spécifiée",
+    demoViaSpecifiedTxProp: "Via la propriété `{{prop}}Tx` spécifiée"
   },
   demoDebugScreen: {
     howTo: "COMMENT FAIRE",
@@ -100,7 +100,7 @@ const fr: Translations = {
     webReactotronHint:
       "Si cela ne fonctionne pas, assurez-vous que l'application de bureau Reactotron est en cours d'exécution, puis rechargez l'application.",
     windowsReactotronHint:
-      "Si cela ne fonctionne pas, assurez-vous que l'application de bureau Reactotron est en cours d'exécution, puis rechargez l'application.",
+      "Si cela ne fonctionne pas, assurez-vous que l'application de bureau Reactotron est en cours d'exécution, puis rechargez l'application."
   },
   demoPodcastListScreen: {
     title: "Épisodes de Radio React Native",
@@ -115,14 +115,14 @@ const fr: Translations = {
       favoriteIcon: "Épisode non favori",
       unfavoriteIcon: "Épisode favori",
       publishLabel: "Publié le {{date}}",
-      durationLabel: "Durée : {{hours}} heures {{minutes}} minutes {{seconds}} secondes",
+      durationLabel: "Durée : {{hours}} heures {{minutes}} minutes {{seconds}} secondes"
     },
     noFavoritesEmptyState: {
       heading: "C'est un peu vide ici",
       content:
-        "Aucun favori n'a été ajouté pour le moment. Appuyez sur le cœur d'un épisode pour l'ajouter à vos favoris !",
-    },
-  },
+        "Aucun favori n'a été ajouté pour le moment. Appuyez sur le cœur d'un épisode pour l'ajouter à vos favoris !"
+    }
+  }
   // @demo remove-block-end
 }
 

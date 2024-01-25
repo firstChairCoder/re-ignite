@@ -1,5 +1,6 @@
 // we always make sure 'react-native' gets included first
 import * as ReactNative from "react-native"
+
 import mockFile from "./mockFile"
 
 // libraries to mock
@@ -14,24 +15,24 @@ jest.doMock("react-native", () => {
           (
             uri: string, // eslint-disable-line @typescript-eslint/no-unused-vars
             success: (width: number, height: number) => void,
-            failure?: (_error: any) => void, // eslint-disable-line @typescript-eslint/no-unused-vars
-          ) => success(100, 100),
-        ),
-      },
+            failure?: (_error: any) => void // eslint-disable-line @typescript-eslint/no-unused-vars
+          ) => success(100, 100)
+        )
+      }
     },
-    ReactNative,
+    ReactNative
   )
 })
 
 jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
+  require("@react-native-async-storage/async-storage/jest/async-storage-mock")
 )
 
 jest.mock("i18n-js", () => ({
   currentLocale: () => "en",
   t: (key: string, params: Record<string, string>) => {
     return `${key} ${JSON.stringify(params)}`
-  },
+  }
 }))
 
 declare const tron // eslint-disable-line @typescript-eslint/no-unused-vars

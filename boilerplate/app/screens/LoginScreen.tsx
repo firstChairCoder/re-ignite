@@ -1,12 +1,15 @@
 import { observer } from "mobx-react-lite"
-import React, { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle } from "react-native"
-import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
+import type { ComponentType, FC } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
+import type { TextInput, TextStyle, ViewStyle } from "react-native"
+
+import type { TextFieldAccessoryProps } from "../components"
+import { Button, Icon, Screen, Text, TextField } from "../components"
 import { useStores } from "../models"
-import { AppStackScreenProps } from "../navigators"
+import type { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 
-interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
+type LoginScreenProps = AppStackScreenProps<"Login">
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
   const authPasswordInput = useRef<TextInput>(null)
@@ -16,7 +19,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
   const {
-    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
+    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError }
   } = useStores()
 
   useEffect(() => {
@@ -63,7 +66,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
           />
         )
       },
-    [isAuthPasswordHidden],
+    [isAuthPasswordHidden]
   )
 
   return (
@@ -119,28 +122,28 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.xxl,
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $signIn: TextStyle = {
-  marginBottom: spacing.sm,
+  marginBottom: spacing.sm
 }
 
 const $enterDetails: TextStyle = {
-  marginBottom: spacing.lg,
+  marginBottom: spacing.lg
 }
 
 const $hint: TextStyle = {
   color: colors.tint,
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }
 
 const $textField: ViewStyle = {
-  marginBottom: spacing.lg,
+  marginBottom: spacing.lg
 }
 
 const $tapButton: ViewStyle = {
-  marginTop: spacing.xs,
+  marginTop: spacing.xs
 }
 
 // @demo remove-file

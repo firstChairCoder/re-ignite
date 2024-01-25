@@ -1,15 +1,13 @@
-import React, { ReactElement } from "react"
-import {
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View,
-  ViewStyle,
-} from "react-native"
+import type { ReactElement } from "react"
+import React from "react"
+import type { StyleProp, TextStyle, TouchableOpacityProps, ViewStyle } from "react-native"
+import { TouchableOpacity, View } from "react-native"
+
 import { colors, spacing } from "../theme"
-import { Icon, IconTypes } from "./Icon"
-import { Text, TextProps } from "./Text"
+import type { IconTypes } from "./Icon"
+import { Icon } from "./Icon"
+import type { TextProps } from "./Text"
+import { Text } from "./Text"
 
 export interface ListItemProps extends TouchableOpacityProps {
   /**
@@ -128,7 +126,7 @@ export function ListItem(props: ListItemProps) {
   const $containerStyles = [
     topSeparator && $separatorTop,
     bottomSeparator && $separatorBottom,
-    $containerStyleOverride,
+    $containerStyleOverride
   ]
 
   const $touchableStyles = [$touchableStyle, { minHeight: height }, style]
@@ -177,7 +175,7 @@ function ListItemAction(props: ListItemActionProps) {
           $iconContainerStyles,
           side === "left" && $iconContainerLeft,
           side === "right" && $iconContainerRight,
-          { height: size },
+          { height: size }
         ]}
       />
     )
@@ -188,35 +186,35 @@ function ListItemAction(props: ListItemActionProps) {
 
 const $separatorTop: ViewStyle = {
   borderTopWidth: 1,
-  borderTopColor: colors.separator,
+  borderTopColor: colors.separator
 }
 
 const $separatorBottom: ViewStyle = {
   borderBottomWidth: 1,
-  borderBottomColor: colors.separator,
+  borderBottomColor: colors.separator
 }
 
 const $textStyle: TextStyle = {
   paddingVertical: spacing.xs,
   alignSelf: "center",
   flexGrow: 1,
-  flexShrink: 1,
+  flexShrink: 1
 }
 
 const $touchableStyle: ViewStyle = {
   flexDirection: "row",
-  alignItems: "flex-start",
+  alignItems: "flex-start"
 }
 
 const $iconContainer: ViewStyle = {
   justifyContent: "center",
   alignItems: "center",
-  flexGrow: 0,
+  flexGrow: 0
 }
 const $iconContainerLeft: ViewStyle = {
-  marginEnd: spacing.md,
+  marginEnd: spacing.md
 }
 
 const $iconContainerRight: ViewStyle = {
-  marginStart: spacing.md,
+  marginStart: spacing.md
 }

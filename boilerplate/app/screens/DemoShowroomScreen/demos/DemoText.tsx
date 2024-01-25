@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-key */
 import React from "react"
+
 import { Text } from "../../../components"
 import { colors } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
@@ -132,15 +133,15 @@ export const DemoText: Demo = {
             textDecorationLine: "underline line-through",
             textDecorationStyle: "dashed",
             color: colors.error,
-            textDecorationColor: colors.error,
+            textDecorationColor: colors.error
           }}
         >
           Eiusmod occaecat laboris eu ex veniam ipsum adipisicing consectetur. Magna ullamco
           adipisicing tempor adipisicing.
         </Text>
       </Text>
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

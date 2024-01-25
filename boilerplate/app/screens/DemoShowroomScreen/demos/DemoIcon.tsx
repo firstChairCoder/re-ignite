@@ -1,33 +1,36 @@
 /* eslint-disable react/jsx-key */
 import React from "react"
-import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { Icon, iconRegistry, IconTypes, Text } from "../../../components"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { View } from "react-native"
+
+import type { IconTypes } from "../../../components"
+import { Icon, iconRegistry, Text } from "../../../components"
 import { colors, spacing } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoUseCase } from "../DemoUseCase"
 
 const $demoIconContainer: ViewStyle = {
-  padding: spacing.xs,
+  padding: spacing.xs
 }
 
 const $iconTile: ViewStyle = {
   width: "33.333%",
   alignItems: "center",
-  paddingVertical: spacing.xs,
+  paddingVertical: spacing.xs
 }
 
 const $iconTileLabel: TextStyle = {
   marginTop: spacing.xxs,
-  color: colors.textDim,
+  color: colors.textDim
 }
 
 const $customIconContainer: ViewStyle = {
   padding: spacing.md,
-  backgroundColor: colors.palette.angry500,
+  backgroundColor: colors.palette.angry500
 }
 
 const $customIcon: ImageStyle = {
-  tintColor: colors.palette.neutral100,
+  tintColor: colors.palette.neutral100
 }
 
 export const DemoIcon: Demo = {
@@ -72,8 +75,8 @@ export const DemoIcon: Demo = {
 
     <DemoUseCase name="Styling" description="The component can be styled easily." layout="row">
       <Icon icon="ladybug" style={$customIcon} size={40} containerStyle={$customIconContainer} />
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

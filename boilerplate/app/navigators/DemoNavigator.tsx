@@ -1,14 +1,16 @@
-import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { CompositeScreenProps } from "@react-navigation/native"
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import type { CompositeScreenProps } from "@react-navigation/native"
 import React from "react"
-import { TextStyle, ViewStyle } from "react-native"
+import type { TextStyle, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+
 import { Icon } from "../components"
 import { translate } from "../i18n"
-import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen } from "../screens"
+import { DemoCommunityScreen, DemoDebugScreen, DemoShowroomScreen } from "../screens"
 import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
-import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import type { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
 export type DemoTabParamList = {
   DemoCommunity: undefined
@@ -41,7 +43,7 @@ export function DemoNavigator() {
         tabBarActiveTintColor: colors.text,
         tabBarInactiveTintColor: colors.text,
         tabBarLabelStyle: $tabBarLabel,
-        tabBarItemStyle: $tabBarItem,
+        tabBarItemStyle: $tabBarItem
       }}
     >
       <Tab.Screen
@@ -51,7 +53,7 @@ export function DemoNavigator() {
           tabBarLabel: translate("demoNavigator.componentsTab"),
           tabBarIcon: ({ focused }) => (
             <Icon icon="components" color={focused ? colors.tint : undefined} size={30} />
-          ),
+          )
         }}
       />
 
@@ -62,7 +64,7 @@ export function DemoNavigator() {
           tabBarLabel: translate("demoNavigator.communityTab"),
           tabBarIcon: ({ focused }) => (
             <Icon icon="community" color={focused ? colors.tint : undefined} size={30} />
-          ),
+          )
         }}
       />
 
@@ -74,7 +76,7 @@ export function DemoNavigator() {
           tabBarLabel: translate("demoNavigator.podcastListTab"),
           tabBarIcon: ({ focused }) => (
             <Icon icon="podcast" color={focused ? colors.tint : undefined} size={30} />
-          ),
+          )
         }}
       />
 
@@ -85,7 +87,7 @@ export function DemoNavigator() {
           tabBarLabel: translate("demoNavigator.debugTab"),
           tabBarIcon: ({ focused }) => (
             <Icon icon="debug" color={focused ? colors.tint : undefined} size={30} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>
@@ -94,17 +96,17 @@ export function DemoNavigator() {
 
 const $tabBar: ViewStyle = {
   backgroundColor: colors.background,
-  borderTopColor: colors.transparent,
+  borderTopColor: colors.transparent
 }
 
 const $tabBarItem: ViewStyle = {
-  paddingTop: spacing.md,
+  paddingTop: spacing.md
 }
 
 const $tabBarLabel: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
-  lineHeight: 16,
+  lineHeight: 16
 }
 
 // @demo remove-file

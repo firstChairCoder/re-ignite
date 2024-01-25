@@ -1,12 +1,13 @@
-import { filesystem, patching } from "gluegun"
-import * as pathlib from "path"
+import * as pathlib from "path";
+
+import { filesystem, patching } from "gluegun";
 
 export enum CommentType {
   REMOVE_FILE = `@demo remove-file`,
   REMOVE_CURRENT_LINE = `@demo remove-current-line`,
   REMOVE_NEXT_LINE = `@demo remove-next-line`,
   REMOVE_BLOCK_START = `@demo remove-block-start`,
-  REMOVE_BLOCK_END = `@demo remove-block-end`,
+  REMOVE_BLOCK_END = `@demo remove-block-end`
 }
 
 /**
@@ -15,40 +16,47 @@ export enum CommentType {
  *
  * NOTE: This currently will _NOT_ remove a multiline comment
  */
-export const demoMarkupRegex = /(\/\/|#)\s*@demo.*|{?\/.*@demo.*\/}?/gm
+export const demoMarkupRegex = /(\/\/|#)\s*@demo.*|{?\/.*@demo.*\/}?/gm;
 
 /**
  * Take the file content as a string and remove any
  * line of code with an `// @demo remove-current-line` comment
  */
-function removeCurrentLine(contents: string, comment = CommentType.REMOVE_CURRENT_LINE): string {
-  const lines = contents.split("\n")
-  const result = lines.filter((line) => !line.includes(comment))
-  return result.join("\n")
+function removeCurrentLine(
+  contents: string,
+  comment = CommentType.REMOVE_CURRENT_LINE
+): string {
+  const lines = contents.split("\n");
+  const result = lines.filter((line) => !line.includes(comment));
+  return result.join("\n");
 }
 
 /**
  * Take the file content as a string and remove the next line
  * of code with an `// @demo remove-next-line` comment before it
  */
-function removeNextLine(contents: string, comment = CommentType.REMOVE_NEXT_LINE): string {
-  const lines = contents.split("\n")
+function removeNextLine(
+  contents: string,
+  comment = CommentType.REMOVE_NEXT_LINE
+): string {
+  const lines = contents.split("\n");
   const result = lines.filter((line, index) => {
-    const prevLine = lines[index - 1]
+    const prevLine = lines[index - 1];
 
-    const preserveCurrent = line.includes(comment) === false
-    const preservePrevious = prevLine !== undefined && prevLine.includes(comment) === false
+    const preserveCurrent = line.includes(comment) === false;
+    const preservePrevious =
+      prevLine !== undefined && prevLine.includes(comment) === false;
 
     if (index === 0) {
       // if we are on the first line, there is no previous line to check
-      return preserveCurrent
+      return preserveCurrent;
     }
 
     // keep current line if there is no comment in current or previous line
-    const keepLine = preserveCurrent && preservePrevious
-    return keepLine
-  })
-  return result.join("\n")
+    const keepLine = preserveCurrent && preservePrevious;
+    return keepLine;
+  });
+  return result.join("\n");
 }
 
 /**
@@ -57,33 +65,38 @@ function removeNextLine(contents: string, comment = CommentType.REMOVE_NEXT_LINE
  */
 function removeBlock(
   contents: string,
-  comment = { start: CommentType.REMOVE_BLOCK_START, end: CommentType.REMOVE_BLOCK_END },
+  comment = {
+    start: CommentType.REMOVE_BLOCK_START,
+    end: CommentType.REMOVE_BLOCK_END
+  }
 ): string {
-  const { start, end } = comment
-  const lines = contents.split("\n")
+  const { start, end } = comment;
+  const lines = contents.split("\n");
 
   const findIndex = (l: typeof lines, c: typeof start | typeof end) =>
-    l.findIndex((line) => line.includes(c))
-  const NOT_FOUND = -1
+    l.findIndex((line) => line.includes(c));
+  const NOT_FOUND = -1;
 
-  const blockStartIndex = findIndex(lines, start)
-  const blockEndIndex = findIndex(lines, end)
-  const blockExists = findIndex(lines, start) !== NOT_FOUND && blockEndIndex !== NOT_FOUND
+  const blockStartIndex = findIndex(lines, start);
+  const blockEndIndex = findIndex(lines, end);
+  const blockExists =
+    findIndex(lines, start) !== NOT_FOUND && blockEndIndex !== NOT_FOUND;
 
   if (blockExists) {
-    const blockLength = blockEndIndex - blockStartIndex + 1
-    lines.splice(blockStartIndex, blockLength) // mutates `lines`
+    const blockLength = blockEndIndex - blockStartIndex + 1;
+    lines.splice(blockStartIndex, blockLength); // mutates `lines`
   }
 
-  const updateContents = lines.join("\n")
+  const updateContents = lines.join("\n");
 
   const anotherBlockExists =
-    findIndex(lines, start) !== NOT_FOUND && findIndex(lines, end) !== NOT_FOUND
+    findIndex(lines, start) !== NOT_FOUND &&
+    findIndex(lines, end) !== NOT_FOUND;
   if (anotherBlockExists) {
-    return removeBlock(updateContents, comment)
+    return removeBlock(updateContents, comment);
   }
 
-  return updateContents
+  return updateContents;
 }
 
 /**
@@ -92,8 +105,8 @@ function removeBlock(
  * @return The file contents with all remove operations performed
  */
 function remove(contents: string): string {
-  const result = removeBlock(removeNextLine(removeCurrentLine(contents)))
-  return result
+  const result = removeBlock(removeNextLine(removeCurrentLine(contents)));
+  return result;
 }
 
 /**
@@ -102,8 +115,8 @@ function remove(contents: string): string {
  * @return The file contents with all @demo related CommentType removed
  */
 function sanitize(contents: string): string {
-  const result = contents.replace(demoMarkupRegex, "")
-  return result
+  const result = contents.replace(demoMarkupRegex, "");
+  return result;
 }
 
 function find(targetDir: string, matching?: string[]) {
@@ -117,8 +130,8 @@ function find(targetDir: string, matching?: string[]) {
     "!**/ios/Pods{,/**}",
     "!**/ios/*.xcworkspace{,/**}",
     "!**/android/build{,/**}",
-    "!**/android/app/build{,/**}",
-  ]
+    "!**/android/app/build{,/**}"
+  ];
 
   const filePaths = filesystem
     .cwd(targetDir)
@@ -126,76 +139,79 @@ function find(targetDir: string, matching?: string[]) {
       matching: matching ?? MATCHING_GLOBS,
       recursive: true,
       files: true,
-      directories: false,
+      directories: false
     })
-    .map((path) => pathlib.join(targetDir, path))
-  return filePaths
+    .map((path) => pathlib.join(targetDir, path));
+  return filePaths;
 }
 
 async function update({
   filePaths,
   dryRun = true,
-  onlyMarkup = false,
+  onlyMarkup = false
 }: {
-  filePaths: string[]
-  dryRun?: boolean
-  onlyMarkup?: boolean
+  filePaths: string[];
+  dryRun?: boolean;
+  onlyMarkup?: boolean;
 }) {
   // Go through every file path and handle the operation for each demo comment
   const demoCommentResults = await Promise.allSettled(
     filePaths.map(async (path) => {
-      const { exists, update } = patching
-      const { read } = filesystem
+      const { exists, update } = patching;
+      const { read } = filesystem;
       const {
         REMOVE_CURRENT_LINE,
         REMOVE_NEXT_LINE,
         REMOVE_BLOCK_START,
         REMOVE_BLOCK_END,
-        REMOVE_FILE,
-      } = demo.CommentType
+        REMOVE_FILE
+      } = demo.CommentType;
 
-      const comments: CommentType[] = []
+      const comments: CommentType[] = [];
 
       if (await exists(path, REMOVE_FILE)) {
         if (!dryRun) {
           if (onlyMarkup) {
-            const contents = read(path)
-            const sanitized = demo.sanitize(contents)
-            filesystem.write(path, sanitized)
+            const contents = read(path);
+            const sanitized = demo.sanitize(contents);
+            filesystem.write(path, sanitized);
           } else {
-            filesystem.remove(path)
+            filesystem.remove(path);
           }
         }
-        comments.push(REMOVE_FILE)
-        return { path, comments }
+        comments.push(REMOVE_FILE);
+        return { path, comments };
       }
 
       const operations = [
         REMOVE_CURRENT_LINE,
         REMOVE_NEXT_LINE,
         REMOVE_BLOCK_START,
-        REMOVE_BLOCK_END,
-      ]
+        REMOVE_BLOCK_END
+      ];
 
-      const shouldUpdate = onlyMarkup ? demoMarkupRegex : RegExp(operations.join("|"), "g")
+      const shouldUpdate = onlyMarkup
+        ? demoMarkupRegex
+        : RegExp(operations.join("|"), "g");
 
       if (await exists(path, shouldUpdate)) {
-        const before = read(path)
+        const before = read(path);
 
         operations.forEach((operation) => {
           if (before.includes(operation)) {
-            comments.push(operation)
+            comments.push(operation);
           }
-        })
+        });
 
-        if (!dryRun) await update(path, onlyMarkup ? demo.sanitize : demo.remove)
+        if (!dryRun)
+          await update(path, onlyMarkup ? demo.sanitize : demo.remove);
       }
 
-      return { path, comments }
-    }),
-  )
+      return { path, comments };
+    })
+  );
 
-  return demoCommentResults
+  return demoCommentResults;
 }
 
 export const demo = {
@@ -206,24 +222,24 @@ export const demo = {
   remove,
   sanitize,
   find,
-  update,
-} as const
+  update
+} as const;
 
 export const demoDependenciesToRemove = [
   "@react-navigation/bottom-tabs",
   "expo-application",
-  "react-native-drawer-layout",
-]
+  "react-native-drawer-layout"
+];
 
 // This function takes a package.json file as a string and removes the dependencies
 // specified in demoDependenciesToRemove and returns the updated package.json as a string.
 export function findAndRemoveDemoDependencies(packageJsonRaw: string): string {
-  let updatedPackageJson = packageJsonRaw
+  let updatedPackageJson = packageJsonRaw;
 
   demoDependenciesToRemove.forEach((depName) => {
-    const regex = new RegExp(`"${depName}"\\s*:\\s*"[^"]+",?`, "g")
-    updatedPackageJson = updatedPackageJson.replace(regex, "")
-  })
+    const regex = new RegExp(`"${depName}"\\s*:\\s*"[^"]+",?`, "g");
+    updatedPackageJson = updatedPackageJson.replace(regex, "");
+  });
 
-  return updatedPackageJson
+  return updatedPackageJson;
 }

@@ -9,8 +9,8 @@
  * @returns `true` for 'true', `false` for 'false', `Boolean` result otherwise.
  */
 export function bool(value: unknown): boolean {
-  if (value === "false") return false
-  return Boolean(value)
+  if (value === "false") return false;
+  return Boolean(value);
 }
 
 /**
@@ -18,6 +18,6 @@ export function bool(value: unknown): boolean {
  * while preserving `undefined` values as `undefined` instead of `false`.
  */
 export function boolFlag(option: unknown): boolean | undefined {
-  if (option === undefined) return undefined
-  return bool(option)
+  if (option === undefined) return undefined;
+  return bool(option);
 }
