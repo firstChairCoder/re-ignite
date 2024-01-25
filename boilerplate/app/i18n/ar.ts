@@ -1,36 +1,36 @@
-import { Translations } from "./en"
+import type { Translations } from "./en"
 
 const ar: Translations = {
   common: {
     ok: "نعم",
     cancel: "حذف",
     back: "خلف",
-    logOut: "تسجيل خروج", // @demo remove-current-line
+    logOut: "تسجيل خروج" // @demo remove-current-line
   },
   welcomeScreen: {
     postscript:
       "ربما لا يكون هذا هو الشكل الذي يبدو عليه تطبيقك مالم يمنحك المصمم هذه الشاشات وشحنها في هذه الحالة",
     readyForLaunch: "تطبيقك تقريبا جاهز للتشغيل",
     exciting: "اوه هذا مثير",
-    letsGo: "لنذهب", // @demo remove-current-line
+    letsGo: "لنذهب" // @demo remove-current-line
   },
   errorScreen: {
     title: "هناك خطأ ما",
     friendlySubtitle:
       "هذه هي الشاشة التي سيشاهدها المستخدمون في عملية الانتاج عند حدوث خطأ. سترغب في تخصيص هذه الرسالة ( الموجودة في 'ts.en/i18n/app') وربما التخطيط ايضاً ('app/screens/ErrorScreen'). إذا كنت تريد إزالة هذا بالكامل، تحقق من 'app/app.tsp' من اجل عنصر <ErrorBoundary>.",
     reset: "اعادة تعيين التطبيق",
-    traceTitle: "خطأ من مجموعة %{name}", // @demo remove-current-line
+    traceTitle: "خطأ من مجموعة %{name}" // @demo remove-current-line
   },
   emptyStateComponent: {
     generic: {
       heading: "فارغة جداً....حزين",
       content: "لا توجد بيانات حتى الآن. حاول النقر فوق الزر لتحديث التطبيق او اعادة تحميله.",
-      button: "لنحاول هذا مرّة أخرى",
-    },
+      button: "لنحاول هذا مرّة أخرى"
+    }
   },
   // @demo remove-block-start
   errors: {
-    invalidEmail: "عنوان البريد الالكتروني غير صالح",
+    invalidEmail: "عنوان البريد الالكتروني غير صالح"
   },
   loginScreen: {
     signIn: "تسجيل الدخول",
@@ -41,13 +41,13 @@ const ar: Translations = {
     emailFieldPlaceholder: "ادخل بريدك الالكتروني",
     passwordFieldPlaceholder: "كلمة السر هنا فائقة السر",
     tapToSignIn: "انقر لتسجيل الدخول!",
-    hint: "(: تلميح: يمكنك استخدام اي عنوان بريد الكتروني وكلمة السر المفضلة لديك",
+    hint: "(: تلميح: يمكنك استخدام اي عنوان بريد الكتروني وكلمة السر المفضلة لديك"
   },
   demoNavigator: {
     componentsTab: "عناصر",
     debugTab: "تصحيح",
     communityTab: "واصل اجتماعي",
-    podcastListTab: "البودكاست",
+    podcastListTab: "البودكاست"
   },
   demoCommunityScreen: {
     title: "تواصل مع المجتمع",
@@ -70,7 +70,7 @@ const ar: Translations = {
     hireUsTitle: "قم بتوظيف Infinite Red لمشروعك القادم",
     hireUs:
       "سواء كان الامر يتعلّق بتشغيل مشروع كامل او اعداد الفرق بسرعة من خلال التدريب العلمي لدينا، يمكن ان يساعد Infinite Red اللامتناهي في اي مشروع محلي يتفاعل معه.",
-    hireUsLink: "ارسل لنا رسالة",
+    hireUsLink: "ارسل لنا رسالة"
   },
   demoShowroomScreen: {
     jumpStart: "مكونات او عناصر لبدء مشروعك",
@@ -78,7 +78,7 @@ const ar: Translations = {
       "عامل الناس بأخلاقك لا بأخلاقهم. عامل الناس بأخلاقك لا بأخلاقهم. عامل الناس بأخلاقك لا بأخلاقهم",
     demoHeaderTxExample: "ياي",
     demoViaTxProp: "عبر `tx` Prop",
-    demoViaSpecifiedTxProp: "Prop `{{prop}}Tx` عبر",
+    demoViaSpecifiedTxProp: "Prop `{{prop}}Tx` عبر"
   },
   demoDebugScreen: {
     howTo: "كيف",
@@ -94,8 +94,7 @@ const ar: Translations = {
       "اذا لم ينجح ذلك، فتأكد من تشغيل تطبيق الحاسوب الخاص ب Reactotron وأعد تحميل التطبيق",
     macosReactotronHint: "اذا لم ينجح ذلك، فتأكد من تشغيل الحاسوب ب Reactotron وأعد تحميل التطبيق",
     webReactotronHint: "اذا لم ينجح ذلك، فتأكد من تشغيل الحاسوب ب Reactotron وأعد تحميل التطبيق",
-    windowsReactotronHint:
-      "اذا لم ينجح ذلك، فتأكد من تشغيل الحاسوب ب Reactotron وأعد تحميل التطبيق",
+    windowsReactotronHint: "اذا لم ينجح ذلك، فتأكد من تشغيل الحاسوب ب Reactotron وأعد تحميل التطبيق"
   },
   demoPodcastListScreen: {
     title: "حلقات إذاعية React Native",
@@ -109,14 +108,14 @@ const ar: Translations = {
       favoriteIcon: "الحلقة الغير مفضّلة",
       unfavoriteIcon: "الحلقة المفضّلة",
       publishLabel: "نشرت {{date}}",
-      durationLabel: "المدّة: {{hours}} ساعات {{minutes}} دقائق {{seconds}} ثواني",
+      durationLabel: "المدّة: {{hours}} ساعات {{minutes}} دقائق {{seconds}} ثواني"
     },
     noFavoritesEmptyState: {
       heading: "هذا يبدو فارغاً بعض الشيء.",
       content:
-        "لم تتم اضافة اي مفضلات حتى الان. اضغط على القلب في إحدى الحلقات لإضافته الى المفضلة.",
-    },
-  },
+        "لم تتم اضافة اي مفضلات حتى الان. اضغط على القلب في إحدى الحلقات لإضافته الى المفضلة."
+    }
+  }
   // @demo remove-block-end
 }
 

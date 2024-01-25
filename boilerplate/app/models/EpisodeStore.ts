@@ -1,6 +1,9 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import type { Instance, SnapshotOut } from "mobx-state-tree"
+import { types } from "mobx-state-tree"
+
 import { api } from "../services/api"
-import { Episode, EpisodeModel } from "./Episode"
+import type { Episode } from "./Episode"
+import { EpisodeModel } from "./Episode"
 import { withSetPropAction } from "./helpers/withSetPropAction"
 
 export const EpisodeStoreModel = types
@@ -8,7 +11,7 @@ export const EpisodeStoreModel = types
   .props({
     episodes: types.array(EpisodeModel),
     favorites: types.array(types.reference(EpisodeModel)),
-    favoritesOnly: false,
+    favoritesOnly: false
   })
   .actions(withSetPropAction)
   .actions((store) => ({
@@ -25,7 +28,7 @@ export const EpisodeStoreModel = types
     },
     removeFavorite(episode: Episode) {
       store.favorites.remove(episode)
-    },
+    }
   }))
   .views((store) => ({
     get episodesForList() {
@@ -34,7 +37,7 @@ export const EpisodeStoreModel = types
 
     hasFavorite(episode: Episode) {
       return store.favorites.includes(episode)
-    },
+    }
   }))
   .actions((store) => ({
     toggleFavorite(episode: Episode) {
@@ -43,10 +46,10 @@ export const EpisodeStoreModel = types
       } else {
         store.addFavorite(episode)
       }
-    },
+    }
   }))
 
-export interface EpisodeStore extends Instance<typeof EpisodeStoreModel> {}
-export interface EpisodeStoreSnapshot extends SnapshotOut<typeof EpisodeStoreModel> {}
+export type EpisodeStore = Instance<typeof EpisodeStoreModel>
+export type EpisodeStoreSnapshot = SnapshotOut<typeof EpisodeStoreModel>
 
 // @demo remove-file

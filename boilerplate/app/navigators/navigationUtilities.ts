@@ -1,16 +1,13 @@
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { BackHandler, Platform } from "react-native"
-import {
-  NavigationState,
-  PartialState,
-  createNavigationContainerRef,
-} from "@react-navigation/native"
+import type { NavigationState, PartialState } from "@react-navigation/native"
+import { createNavigationContainerRef } from "@react-navigation/native"
+
 import Config from "../config"
 import type { PersistNavigationConfig } from "../config/config.base"
 import { useIsMounted } from "../utils/useIsMounted"
 import type { AppStackParamList, NavigationProps } from "./AppNavigator"
-
-import * as storage from "../utils/storage"
+import type * as storage from "../utils/storage"
 
 type Storage = typeof storage
 
@@ -179,7 +176,7 @@ export function goBack() {
  * resetRoot will reset the root navigation state to the given params.
  */
 export function resetRoot(
-  state: Parameters<typeof navigationRef.resetRoot>[0] = { index: 0, routes: [] },
+  state: Parameters<typeof navigationRef.resetRoot>[0] = { index: 0, routes: [] }
 ) {
   if (navigationRef.isReady()) {
     navigationRef.resetRoot(state)

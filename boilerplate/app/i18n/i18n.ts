@@ -3,7 +3,8 @@ import i18n from "i18n-js"
 import { I18nManager } from "react-native"
 
 // if English isn't your default language, move Translations to the appropriate language file.
-import en, { Translations } from "./en"
+import type { Translations } from "./en"
+import en from "./en"
 import ar from "./ar"
 import ko from "./ko"
 import fr from "./fr"
@@ -22,7 +23,7 @@ const preferredLanguage:
   | Localization.Locale
   | { languageTag: string; textDirection: "ltr" | "rtl" } = locales[0] || {
   languageTag: "en-US",
-  textDirection: "ltr",
+  textDirection: "ltr"
 }
 i18n.locale = preferredLanguage.languageTag
 

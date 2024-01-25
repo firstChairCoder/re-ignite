@@ -1,11 +1,16 @@
-import { Link, RouteProp, useRoute } from "@react-navigation/native"
-import React, { FC, ReactElement, useEffect, useRef, useState } from "react"
-import { Image, ImageStyle, Platform, SectionList, TextStyle, View, ViewStyle } from "react-native"
+import type { RouteProp } from "@react-navigation/native"
+import { Link, useRoute } from "@react-navigation/native"
+import type { FC, ReactElement } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { Image, Platform, SectionList, View } from "react-native"
 import { Drawer } from "react-native-drawer-layout"
 import { type ContentStyle } from "@shopify/flash-list"
-import { ListItem, ListView, ListViewRef, Screen, Text } from "../../components"
+
+import type { ListViewRef } from "../../components"
+import { ListItem, ListView, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
-import { DemoTabParamList, DemoTabScreenProps } from "../../navigators/DemoNavigator"
+import type { DemoTabParamList, DemoTabScreenProps } from "../../navigators/DemoNavigator"
 import { colors, spacing } from "../../theme"
 import { useSafeAreaInsetsStyle } from "../../utils/useSafeAreaInsetsStyle"
 import * as Demos from "./demos"
@@ -79,21 +84,21 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const listRef = useRef<SectionList>(null)
     const menuRef = useRef<ListViewRef<DemoListItem["item"]>>(null)
     const route = useRoute<RouteProp<DemoTabParamList, "DemoShowroom">>()
-    const params = route.params
+    const { params } = route
 
     // handle Web links
     React.useEffect(() => {
       if (params !== undefined && Object.keys(params).length > 0) {
         const demoValues = Object.values(Demos)
         const findSectionIndex = demoValues.findIndex(
-          (x) => x.name.toLowerCase() === params.queryIndex,
+          (x) => x.name.toLowerCase() === params.queryIndex
         )
         let findItemIndex = 0
         if (params.itemIndex) {
           try {
             findItemIndex =
               demoValues[findSectionIndex].data.findIndex(
-                (u) => slugify(u.props.name) === params.itemIndex,
+                (u) => slugify(u.props.name) === params.itemIndex
               ) + 1
           } catch (err) {
             console.error(err)
@@ -115,7 +120,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
       listRef.current?.scrollToLocation({
         animated: true,
         itemIndex,
-        sectionIndex,
+        sectionIndex
       })
       toggleDrawer()
     }
@@ -131,9 +136,9 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
           listRef.current?.scrollToLocation({
             animated: true,
             itemIndex: info.index,
-            sectionIndex: 0,
+            sectionIndex: 0
           }),
-        50,
+        50
       )
     }
 
@@ -162,7 +167,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
               estimatedItemSize={250}
               data={Object.values(Demos).map((d) => ({
                 name: d.name,
-                useCases: d.data.map((u) => u.props.name as string),
+                useCases: d.data.map((u) => u.props.name as string)
               }))}
               keyExtractor={(item) => item.name}
               renderItem={({ item, index: sectionIndex }) => (
@@ -205,54 +210,54 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
   }
 
 const $screenContainer: ViewStyle = {
-  flex: 1,
+  flex: 1
 }
 
 const $drawer: ViewStyle = {
   backgroundColor: colors.background,
-  flex: 1,
+  flex: 1
 }
 
 const $listContentContainer: ContentStyle = {
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $sectionListContentContainer: ViewStyle = {
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $heading: ViewStyle = {
-  marginBottom: spacing.xxxl,
+  marginBottom: spacing.xxxl
 }
 
 const $logoImage: ImageStyle = {
   height: 42,
-  width: 77,
+  width: 77
 }
 
 const $logoContainer: ViewStyle = {
   alignSelf: "flex-start",
   justifyContent: "center",
   height: 56,
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $menuContainer: ViewStyle = {
   paddingBottom: spacing.xs,
-  paddingTop: spacing.lg,
+  paddingTop: spacing.lg
 }
 
 const $demoItemName: TextStyle = {
   fontSize: 24,
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }
 
 const $demoItemDescription: TextStyle = {
-  marginBottom: spacing.xxl,
+  marginBottom: spacing.xxl
 }
 
 const $demoUseCasesSpacer: ViewStyle = {
-  paddingBottom: spacing.xxl,
+  paddingBottom: spacing.xxl
 }
 
 // @demo remove-file

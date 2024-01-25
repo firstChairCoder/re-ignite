@@ -1,15 +1,17 @@
-import React, { ComponentType, Fragment, ReactElement } from "react"
-import {
+import type { ComponentType, ReactElement } from "react"
+import React, { Fragment } from "react"
+import type {
   StyleProp,
   TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
-  View,
   ViewProps,
-  ViewStyle,
+  ViewStyle
 } from "react-native"
+import { TouchableOpacity, View } from "react-native"
+
 import { colors, spacing } from "../theme"
-import { Text, TextProps } from "./Text"
+import type { TextProps } from "./Text"
+import { Text } from "./Text"
 
 type Presets = keyof typeof $containerPresets
 
@@ -165,26 +167,26 @@ export function Card(props: CardProps) {
     $headingPresets[preset],
     (isFooterPresent || isContentPresent) && { marginBottom: spacing.xxxs },
     $headingStyleOverride,
-    HeadingTextProps?.style,
+    HeadingTextProps?.style
   ]
   const $contentStyle = [
     $contentPresets[preset],
     isHeadingPresent && { marginTop: spacing.xxxs },
     isFooterPresent && { marginBottom: spacing.xxxs },
     $contentStyleOverride,
-    ContentTextProps?.style,
+    ContentTextProps?.style
   ]
   const $footerStyle = [
     $footerPresets[preset],
     (isHeadingPresent || isContentPresent) && { marginTop: spacing.xxxs },
     $footerStyleOverride,
-    FooterTextProps?.style,
+    FooterTextProps?.style
   ]
   const $alignmentWrapperStyle = [
     $alignmentWrapper,
     { justifyContent: $alignmentWrapperFlexOptions[verticalAlignment] },
     LeftComponent && { marginStart: spacing.md },
-    RightComponent && { marginEnd: spacing.md },
+    RightComponent && { marginEnd: spacing.md }
   ]
 
   return (
@@ -252,19 +254,19 @@ const $containerBase: ViewStyle = {
   shadowRadius: 12.81,
   elevation: 16,
   minHeight: 96,
-  flexDirection: "row",
+  flexDirection: "row"
 }
 
 const $alignmentWrapper: ViewStyle = {
   flex: 1,
-  alignSelf: "stretch",
+  alignSelf: "stretch"
 }
 
 const $alignmentWrapperFlexOptions = {
   top: "flex-start",
   center: "center",
   "space-between": "space-between",
-  "force-footer-bottom": "space-between",
+  "force-footer-bottom": "space-between"
 } as const
 
 const $containerPresets = {
@@ -272,27 +274,27 @@ const $containerPresets = {
     $containerBase,
     {
       backgroundColor: colors.palette.neutral100,
-      borderColor: colors.palette.neutral300,
-    },
+      borderColor: colors.palette.neutral300
+    }
   ] as StyleProp<ViewStyle>,
 
   reversed: [
     $containerBase,
-    { backgroundColor: colors.palette.neutral800, borderColor: colors.palette.neutral500 },
-  ] as StyleProp<ViewStyle>,
+    { backgroundColor: colors.palette.neutral800, borderColor: colors.palette.neutral500 }
+  ] as StyleProp<ViewStyle>
 }
 
 const $headingPresets: Record<Presets, TextStyle> = {
   default: {},
-  reversed: { color: colors.palette.neutral100 },
+  reversed: { color: colors.palette.neutral100 }
 }
 
 const $contentPresets: Record<Presets, TextStyle> = {
   default: {},
-  reversed: { color: colors.palette.neutral100 },
+  reversed: { color: colors.palette.neutral100 }
 }
 
 const $footerPresets: Record<Presets, TextStyle> = {
   default: {},
-  reversed: { color: colors.palette.neutral100 },
+  reversed: { color: colors.palette.neutral100 }
 }

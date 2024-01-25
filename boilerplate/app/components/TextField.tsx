@@ -1,16 +1,12 @@
-import React, { ComponentType, forwardRef, Ref, useImperativeHandle, useRef } from "react"
-import {
-  StyleProp,
-  TextInput,
-  TextInputProps,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from "react-native"
+import type { ComponentType, Ref } from "react"
+import React, { forwardRef, useImperativeHandle, useRef } from "react"
+import type { StyleProp, TextInputProps, TextStyle, ViewStyle } from "react-native"
+import { TextInput, TouchableOpacity, View } from "react-native"
+
 import { isRTL, translate } from "../i18n"
 import { colors, spacing, typography } from "../theme"
-import { Text, TextProps } from "./Text"
+import type { TextProps } from "./Text"
+import { Text } from "./Text"
 
 export interface TextFieldAccessoryProps {
   style: StyleProp<any>
@@ -141,7 +137,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
     TextInputProps.multiline && { minHeight: 112 },
     LeftAccessory && { paddingStart: 0 },
     RightAccessory && { paddingEnd: 0 },
-    $inputWrapperStyleOverride,
+    $inputWrapperStyleOverride
   ]
 
   const $inputStyles: StyleProp<TextStyle> = [
@@ -149,13 +145,13 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
     disabled && { color: colors.textDim },
     isRTL && { textAlign: "right" as TextStyle["textAlign"] },
     TextInputProps.multiline && { height: "auto" },
-    $inputStyleOverride,
+    $inputStyleOverride
   ]
 
   const $helperStyles = [
     $helperStyle,
     status === "error" && { color: colors.error },
-    HelperTextProps?.style,
+    HelperTextProps?.style
   ]
 
   function focusInput() {
@@ -230,7 +226,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
 })
 
 const $labelStyle: TextStyle = {
-  marginBottom: spacing.xs,
+  marginBottom: spacing.xs
 }
 
 const $inputWrapperStyle: ViewStyle = {
@@ -240,7 +236,7 @@ const $inputWrapperStyle: ViewStyle = {
   borderRadius: 4,
   backgroundColor: colors.palette.neutral200,
   borderColor: colors.palette.neutral400,
-  overflow: "hidden",
+  overflow: "hidden"
 }
 
 const $inputStyle: TextStyle = {
@@ -254,22 +250,22 @@ const $inputStyle: TextStyle = {
   paddingVertical: 0,
   paddingHorizontal: 0,
   marginVertical: spacing.xs,
-  marginHorizontal: spacing.sm,
+  marginHorizontal: spacing.sm
 }
 
 const $helperStyle: TextStyle = {
-  marginTop: spacing.xs,
+  marginTop: spacing.xs
 }
 
 const $rightAccessoryStyle: ViewStyle = {
   marginEnd: spacing.xs,
   height: 40,
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 }
 const $leftAccessoryStyle: ViewStyle = {
   marginStart: spacing.xs,
   height: 40,
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 }

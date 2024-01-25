@@ -43,7 +43,7 @@ export enum ErrorType {
   /**
    * An error caught by try/catch where defined using Reactotron.tron.error.
    */
-  HANDLED = "Handled",
+  HANDLED = "Handled"
 }
 
 /**

@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
+
 import { EmptyState } from "../../../components"
 import { colors } from "../../../theme"
 import { DemoDivider } from "../DemoDivider"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoUseCase } from "../DemoUseCase"
 
 export const DemoEmptyState: Demo = {
@@ -57,21 +58,21 @@ export const DemoEmptyState: Demo = {
         headingStyle={{
           color: colors.palette.neutral100,
           textDecorationLine: "underline",
-          textDecorationColor: colors.palette.neutral100,
+          textDecorationColor: colors.palette.neutral100
         }}
         contentStyle={{
           color: colors.palette.neutral100,
           textDecorationLine: "underline",
-          textDecorationColor: colors.palette.neutral100,
+          textDecorationColor: colors.palette.neutral100
         }}
         buttonStyle={{ alignSelf: "center", backgroundColor: colors.palette.neutral100 }}
         buttonTextStyle={{ color: colors.error }}
         ButtonProps={{
-          preset: "reversed",
+          preset: "reversed"
         }}
       />
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

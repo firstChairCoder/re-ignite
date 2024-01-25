@@ -1,18 +1,19 @@
-import { GluegunToolbox } from "gluegun"
-import { showGeneratorHelp, updateGenerators } from "../tools/generators"
-import { p, warning } from "../tools/pretty"
+import type { GluegunToolbox } from "gluegun";
+
+import { showGeneratorHelp, updateGenerators } from "../tools/generators";
+import { p, warning } from "../tools/pretty";
 
 module.exports = {
   description: "Update generator templates",
   run: async (toolbox: GluegunToolbox) => {
-    const { parameters } = toolbox
-    p()
+    const { parameters } = toolbox;
+    p();
     if (parameters.options.all || parameters.first) {
-      updateGenerators(toolbox)
+      updateGenerators(toolbox);
     } else {
-      warning(`⚠️  Update what?`)
-      p()
-      showGeneratorHelp(toolbox)
+      warning(`⚠️  Update what?`);
+      p();
+      showGeneratorHelp(toolbox);
     }
-  },
-}
+  }
+};

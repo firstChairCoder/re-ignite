@@ -1,5 +1,6 @@
-import { filesystem } from "gluegun"
-import * as pathlib from "path"
+import * as pathlib from "path";
+
+import { filesystem } from "gluegun";
 
 /**
  * A lot like gluegun's filesystem.subdirectories(), but gets files too.
@@ -8,16 +9,20 @@ import * as pathlib from "path"
  *
  * Right about right here: https://github.com/infinitered/gluegun/blob/master/src/toolbox/filesystem-tools.ts#L52
  */
-export function children(path: string, isRelative = false, matching = "*"): string[] {
+export function children(
+  path: string,
+  isRelative = false,
+  matching = "*"
+): string[] {
   const dirs = filesystem.cwd(path).find({
     matching,
     directories: true,
     recursive: false,
-    files: true,
-  })
+    files: true
+  });
   if (isRelative) {
-    return dirs
+    return dirs;
   } else {
-    return dirs.map((dir) => pathlib.join(path, dir))
+    return dirs.map((dir) => pathlib.join(path, dir));
   }
 }

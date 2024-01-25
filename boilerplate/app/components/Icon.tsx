@@ -1,15 +1,13 @@
 import * as React from "react"
-import { ComponentType } from "react"
-import {
-  Image,
+import type { ComponentType } from "react"
+import type {
   ImageStyle,
   StyleProp,
-  TouchableOpacity,
   TouchableOpacityProps,
-  View,
   ViewProps,
-  ViewStyle,
+  ViewStyle
 } from "react-native"
+import { Image, TouchableOpacity, View } from "react-native"
 
 export type IconTypes = keyof typeof iconRegistry
 
@@ -70,7 +68,7 @@ export function Icon(props: IconProps) {
     $imageStyleBase,
     color !== undefined && { tintColor: color },
     size !== undefined && { width: size, height: size },
-    $imageStyleOverride,
+    $imageStyleOverride
   ]
 
   return (
@@ -106,9 +104,9 @@ export const iconRegistry = {
   settings: require("../../assets/icons/settings.png"),
   slack: require("../../assets/icons/demo/slack.png"), // @demo remove-current-line
   view: require("../../assets/icons/view.png"),
-  x: require("../../assets/icons/x.png"),
+  x: require("../../assets/icons/x.png")
 }
 
 const $imageStyleBase: ImageStyle = {
-  resizeMode: "contain",
+  resizeMode: "contain"
 }

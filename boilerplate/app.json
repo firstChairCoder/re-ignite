@@ -1,10 +1,10 @@
 {
-  "name": "HelloWorld",
-  "displayName": "HelloWorld",
+  "name": "re-ignite",
+  "displayName": "re-ignite",
   "expo": {
-    "name": "HelloWorld",
-    "slug": "HelloWorld",
-    "scheme": "helloworld",
+    "name": "re-ignite",
+    "slug": "re-ignite",
+    "scheme": "re-ignite",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",

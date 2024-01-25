@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
-import { TextStyle, View, ViewStyle } from "react-native"
+import type { TextStyle, ViewStyle } from "react-native"
+import { View } from "react-native"
+
 import { Icon, ListItem, ListView, Text } from "../../../components"
 import { colors, spacing } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import type { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
@@ -19,26 +21,26 @@ const $customLeft: ViewStyle = {
   height: "100%",
   flexDirection: "row",
   flexWrap: "wrap",
-  overflow: "hidden",
+  overflow: "hidden"
 }
 
 const $customTextStyle: TextStyle = {
-  color: colors.error,
+  color: colors.error
 }
 
 const $customTouchableStyle: ViewStyle = {
-  backgroundColor: colors.error,
+  backgroundColor: colors.error
 }
 
 const $customContainerStyle: ViewStyle = {
   borderTopWidth: 5,
-  borderTopColor: colors.palette.neutral100,
+  borderTopColor: colors.palette.neutral100
 }
 
 const $listStyle: ViewStyle = {
   height: 148,
   paddingHorizontal: spacing.xs,
-  backgroundColor: colors.palette.neutral200,
+  backgroundColor: colors.palette.neutral200
 }
 
 export const DemoListItem: Demo = {
@@ -195,8 +197,8 @@ export const DemoListItem: Demo = {
       >
         Tinted Icons
       </ListItem>
-    </DemoUseCase>,
-  ],
+    </DemoUseCase>
+  ]
 }
 
 // @demo remove-file

@@ -1,36 +1,36 @@
-import { Translations } from "./en"
+import type { Translations } from "./en"
 
 const ko: Translations = {
   common: {
     ok: "확인!",
     cancel: "취소",
     back: "뒤로",
-    logOut: "로그아웃", // @demo remove-current-line
+    logOut: "로그아웃" // @demo remove-current-line
   },
   welcomeScreen: {
     postscript:
       "잠깐! — 지금 보시는 것은 아마도 당신의 앱의 모양새가 아닐겁니다. (디자이너분이 이렇게 건내주셨다면 모를까요. 만약에 그렇다면, 이대로 가져갑시다!) ",
     readyForLaunch: "출시 준비가 거의 끝난 나만의 앱!",
     exciting: "(오, 이거 신나는데요!)",
-    letsGo: "가보자구요!", // @demo remove-current-line
+    letsGo: "가보자구요!" // @demo remove-current-line
   },
   errorScreen: {
     title: "뭔가 잘못되었습니다!",
     friendlySubtitle:
       "이 화면은 오류가 발생할 때 프로덕션에서 사용자에게 표시됩니다. 이 메시지를 커스터마이징 할 수 있고(해당 파일은 `app/i18n/ko.ts` 에 있습니다) 레이아웃도 마찬가지로 수정할 수 있습니다(`app/screens/error`). 만약 이 오류화면을 완전히 없에버리고 싶다면 `app/app.tsx` 파일에서 <ErrorBoundary> 컴포넌트를 확인하기 바랍니다.",
     reset: "초기화",
-    traceTitle: "%{name} 스택에서의 오류", // @demo remove-current-line
+    traceTitle: "%{name} 스택에서의 오류" // @demo remove-current-line
   },
   emptyStateComponent: {
     generic: {
       heading: "너무 텅 비어서.. 너무 슬퍼요..",
       content: "데이터가 없습니다. 버튼을 눌러서 리프레쉬 하시거나 앱을 리로드하세요.",
-      button: "다시 시도해봅시다",
-    },
+      button: "다시 시도해봅시다"
+    }
   },
   // @demo remove-block-start
   errors: {
-    invalidEmail: "잘못된 이메일 주소 입니다.",
+    invalidEmail: "잘못된 이메일 주소 입니다."
   },
   loginScreen: {
     signIn: "로그인",
@@ -41,13 +41,13 @@ const ko: Translations = {
     emailFieldPlaceholder: "이메일을 입력하세요",
     passwordFieldPlaceholder: "엄청 비밀스러운 암호를 입력하세요",
     tapToSignIn: "눌러서 로그인 하기!",
-    hint: "힌트: 가장 좋아하는 암호와 아무런 아무 이메일 주소나 사용할 수 있어요 :)",
+    hint: "힌트: 가장 좋아하는 암호와 아무런 아무 이메일 주소나 사용할 수 있어요 :)"
   },
   demoNavigator: {
     componentsTab: "컴포넌트",
     debugTab: "디버그",
     communityTab: "커뮤니티",
-    podcastListTab: "팟캐스트",
+    podcastListTab: "팟캐스트"
   },
   demoCommunityScreen: {
     title: "커뮤니티와 함께해요",
@@ -70,7 +70,7 @@ const ko: Translations = {
     hireUsTitle: "다음 프로젝트에 Infinite Red 를 고용하세요",
     hireUs:
       "프로젝트 전체를 수행하든, 실무 교육을 통해 팀의 개발 속도에 박차를 가하든 상관없이, Infinite Red 는 React Native 프로젝트의 모든 분야의 에서 도움을 드릴 수 있습니다.",
-    hireUsLink: "메세지 보내기",
+    hireUsLink: "메세지 보내기"
   },
   demoShowroomScreen: {
     jumpStart: "프로젝트를 바로 시작할 수 있는 컴포넌트들!",
@@ -78,7 +78,7 @@ const ko: Translations = {
       "별 하나에 추억과, 별 하나에 사랑과, 별 하나에 쓸쓸함과, 별 하나에 동경(憧憬)과, 별 하나에 시와, 별 하나에 어머니, 어머니",
     demoHeaderTxExample: "야호",
     demoViaTxProp: "`tx` Prop 을 통해",
-    demoViaSpecifiedTxProp: "`{{prop}}Tx` Prop 을 통해",
+    demoViaSpecifiedTxProp: "`{{prop}}Tx` Prop 을 통해"
   },
   demoDebugScreen: {
     howTo: "사용방법",
@@ -98,7 +98,7 @@ const ko: Translations = {
     webReactotronHint:
       "만약에 동작하지 않는 경우, Reactotron 데스크탑 앱이 실행중인지 확인 후 앱을 다시 실행해보세요.",
     windowsReactotronHint:
-      "만약에 동작하지 않는 경우, Reactotron 데스크탑 앱이 실행중인지 확인 후 앱을 다시 실행해보세요.",
+      "만약에 동작하지 않는 경우, Reactotron 데스크탑 앱이 실행중인지 확인 후 앱을 다시 실행해보세요."
   },
   demoPodcastListScreen: {
     title: "React Native 라디오 에피소드",
@@ -113,13 +113,13 @@ const ko: Translations = {
       favoriteIcon: "좋아하는 에피소드",
       unfavoriteIcon: "즐겨찾기하지 않은 에피소드",
       publishLabel: "{{date}} 에 발행됨",
-      durationLabel: "소요시간: {{hours}}시간 {{minutes}}분 {{seconds}}초",
+      durationLabel: "소요시간: {{hours}}시간 {{minutes}}분 {{seconds}}초"
     },
     noFavoritesEmptyState: {
       heading: "조금 텅 비어 있네요.",
-      content: "즐겨찾기가 없습니다. 에피소드에 있는 하트를 눌러서 즐겨찾기에 추가하세요.",
-    },
-  },
+      content: "즐겨찾기가 없습니다. 에피소드에 있는 하트를 눌러서 즐겨찾기에 추가하세요."
+    }
+  }
   // @demo remove-block-end
 }
 

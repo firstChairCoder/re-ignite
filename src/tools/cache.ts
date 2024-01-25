@@ -1,78 +1,85 @@
-import * as crypto from "crypto"
-import { filesystem } from "gluegun"
-import type { PackagerName } from "./packager"
+import * as crypto from "crypto";
+
+import { filesystem } from "gluegun";
+
+import type { PackagerName } from "./packager";
 
 const lockFile = {
   yarn: "yarn.lock",
   pnpm: "pnpm-lock.yaml",
   npm: "package-lock.json",
-  bun: "bun.lockb",
-} as const
+  bun: "bun.lockb"
+} as const;
 
-const MAC: NodeJS.Platform = "darwin"
-const WINDOWS: NodeJS.Platform = "win32"
-const LINUX: NodeJS.Platform = "linux"
+const MAC: NodeJS.Platform = "darwin";
+const WINDOWS: NodeJS.Platform = "win32";
+const LINUX: NodeJS.Platform = "linux";
 const cachePath = {
   [MAC]: "Library/Caches",
   [WINDOWS]: "AppData/Local/Temp",
-  [LINUX]: ".cache",
-} as const
+  [LINUX]: ".cache"
+} as const;
 
-const { path, dir, homedir } = filesystem
+const { path, dir, homedir } = filesystem;
 
 function hash(str: string) {
-  return crypto.createHash("md5").update(str).digest("hex")
+  return crypto.createHash("md5").update(str).digest("hex");
 }
 
 interface TargetsOptions {
-  rootDir: string
-  packagerName: PackagerName
-  platform: NodeJS.Platform | undefined
+  rootDir: string;
+  packagerName: PackagerName;
+  platform: NodeJS.Platform | undefined;
 }
 const targets = ({ rootDir, packagerName, platform }: TargetsOptions) => {
   const cachePaths = [
     { type: "dir", path: path(rootDir, "node_modules") },
-    { type: "file", path: path(rootDir, lockFile[packagerName]) },
-  ] as { type: string; path: string; platform?: NodeJS.Platform[] }[]
+    { type: "file", path: path(rootDir, lockFile[packagerName]) }
+  ] as { type: string; path: string; platform?: NodeJS.Platform[] }[];
   return cachePaths.filter((target) =>
-    target?.platform ? target.platform.includes(platform) : true,
-  )
-}
+    target?.platform ? target.platform.includes(platform) : true
+  );
+};
 
 interface CopyOptions {
-  fromRootDir: string
-  toRootDir: string
-  packagerName: PackagerName
-  platform?: NodeJS.Platform
+  fromRootDir: string;
+  toRootDir: string;
+  packagerName: PackagerName;
+  platform?: NodeJS.Platform;
 }
 function copy(options: CopyOptions) {
-  const { fromRootDir, toRootDir, packagerName, platform = process.platform } = options
+  const {
+    fromRootDir,
+    toRootDir,
+    packagerName,
+    platform = process.platform
+  } = options;
 
-  const fromTargets = targets({ rootDir: fromRootDir, packagerName, platform })
-  const toTargets = targets({ rootDir: toRootDir, packagerName, platform })
+  const fromTargets = targets({ rootDir: fromRootDir, packagerName, platform });
+  const toTargets = targets({ rootDir: toRootDir, packagerName, platform });
 
   return Promise.all(
     fromTargets.map((from, index) => {
-      const to = toTargets[index]
+      const to = toTargets[index];
       if (from.type === "dir") {
-        dir(from.path)
+        dir(from.path);
       }
 
-      return filesystem.copyAsync(from.path, to.path, { overwrite: true })
-    }),
-  )
+      return filesystem.copyAsync(from.path, to.path, { overwrite: true });
+    })
+  );
 }
 
 /**
  * Root directory path of ignite dependency cache
  */
 function rootdir(platform: NodeJS.Platform = process.platform) {
-  const folder = cachePath[platform] ?? cachePath[LINUX]
-  return path(homedir(), folder, "ignite")
+  const folder = cachePath[platform] ?? cachePath[LINUX];
+  return path(homedir(), folder, "ignite");
 }
 
 function clear() {
-  filesystem.remove(rootdir())
+  filesystem.remove(rootdir());
 }
 
 /** Tool for managing cache of dependencies related to the ignite boilerplate */
@@ -81,5 +88,5 @@ export const cache = {
   targets,
   hash,
   rootdir,
-  clear,
-} as const
+  clear
+} as const;

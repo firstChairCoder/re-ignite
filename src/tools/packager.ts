@@ -1,78 +1,79 @@
-import { system } from "gluegun"
-import { spawnProgress } from "./spawn"
+import { system } from "gluegun";
+
+import { spawnProgress } from "./spawn";
 
 // we really need a packager core extension on Gluegun
 // in the meantime, we'll use this hacked together version
 
 // Expo doesn't support pnpm, so we'll use yarn or npm
-export type PackagerName = "npm" | "yarn" | "pnpm" | "bun"
+export type PackagerName = "npm" | "yarn" | "pnpm" | "bun";
 type PackageOptions = {
-  packagerName?: PackagerName
-  dev?: boolean
-  global?: boolean
-  silent?: boolean
-}
+  packagerName?: PackagerName;
+  dev?: boolean;
+  global?: boolean;
+  silent?: boolean;
+};
 
 type PackageRunOptions = PackageOptions & {
-  onProgress?: (out: string) => void
-}
+  onProgress?: (out: string) => void;
+};
 const packageInstallOptions: PackageRunOptions = {
   dev: false,
-  onProgress: (out: string) => console.log(out),
-}
+  onProgress: (out: string) => console.log(out)
+};
 
 const packageListOptions: PackageOptions = {
-  global: false,
-}
+  global: false
+};
 
-let isYarn
+let isYarn;
 function yarnAvailable() {
-  if (isYarn !== undefined) return isYarn
-  isYarn = Boolean(system.which("yarn"))
-  return isYarn
+  if (isYarn !== undefined) return isYarn;
+  isYarn = Boolean(system.which("yarn"));
+  return isYarn;
 }
 
-let isPnpm
+let isPnpm;
 function pnpmAvailable() {
-  if (isPnpm !== undefined) return isPnpm
-  isPnpm = Boolean(system.which("pnpm"))
-  return isPnpm
+  if (isPnpm !== undefined) return isPnpm;
+  isPnpm = Boolean(system.which("pnpm"));
+  return isPnpm;
 }
 
-let isBun
+let isBun;
 function bunAvailable() {
-  if (isBun !== undefined) return isBun
-  isBun = Boolean(system.which("bun"))
-  return isBun
+  if (isBun !== undefined) return isBun;
+  isBun = Boolean(system.which("bun"));
+  return isBun;
 }
 
 function detectPackager(): PackagerName {
   if (yarnAvailable()) {
-    return "yarn"
+    return "yarn";
   } else if (pnpmAvailable()) {
-    return "pnpm"
+    return "pnpm";
   } else if (bunAvailable()) {
-    return "bun"
+    return "bun";
   } else {
-    return "npm"
+    return "npm";
   }
 }
 
 function availablePackagers(): PackagerName[] {
-  const packagers: PackagerName[] = ["npm"]
+  const packagers: PackagerName[] = ["npm"];
 
   if (yarnAvailable()) {
-    packagers.push("yarn")
+    packagers.push("yarn");
   }
   if (pnpmAvailable()) {
-    packagers.push("pnpm")
+    packagers.push("pnpm");
   }
 
   if (bunAvailable()) {
-    packagers.push("bun")
+    packagers.push("bun");
   }
 
-  return packagers
+  return packagers;
 }
 
 /**
@@ -82,25 +83,28 @@ function availablePackagers(): PackagerName[] {
  * For example, `yarn add ramda` or `npm install ramda`.
  *
  */
-function addCmd(pkg: string, options: PackageRunOptions = packageInstallOptions) {
-  const silent = options.silent ? " --silent" : ""
+function addCmd(
+  pkg: string,
+  options: PackageRunOptions = packageInstallOptions
+) {
+  const silent = options.silent ? " --silent" : "";
 
-  let cmd
+  let cmd;
 
   if (options.packagerName === "pnpm") {
-    cmd = `pnpm install`
+    cmd = `pnpm install`;
   } else if (options.packagerName === "yarn") {
-    cmd = `yarn add`
+    cmd = `yarn add`;
   } else if (options.packagerName === "npm") {
-    cmd = `npm install`
+    cmd = `npm install`;
   } else if (options.packagerName === "bun") {
-    cmd = `bun add`
+    cmd = `bun add`;
   } else {
     // neither expo nor a packagerName was provided, so let's detect one
-    return addCmd(pkg, { ...options, packagerName: detectPackager() })
+    return addCmd(pkg, { ...options, packagerName: detectPackager() });
   }
 
-  return `${cmd} ${pkg}${options.dev ? " --save-dev" : ""}${silent}`
+  return `${cmd} ${pkg}${options.dev ? " --save-dev" : ""}${silent}`;
 }
 
 /**
@@ -110,25 +114,28 @@ function addCmd(pkg: string, options: PackageRunOptions = packageInstallOptions)
  * For example, `yarn remove ramda` or `npm uninstall ramda`.
  *
  */
-function removeCmd(pkg: string, options: PackageOptions = packageInstallOptions) {
-  const silent = options.silent ? " --silent" : ""
+function removeCmd(
+  pkg: string,
+  options: PackageOptions = packageInstallOptions
+) {
+  const silent = options.silent ? " --silent" : "";
 
-  let cmd
+  let cmd;
 
   if (options.packagerName === "pnpm") {
-    cmd = "pnpm uninstall"
+    cmd = "pnpm uninstall";
   } else if (options.packagerName === "yarn") {
-    cmd = `yarn remove`
+    cmd = `yarn remove`;
   } else if (options.packagerName === "npm") {
-    cmd = `npm uninstall`
+    cmd = `npm uninstall`;
   } else if (options.packagerName === "bun") {
-    cmd = `bun remove`
+    cmd = `bun remove`;
   } else {
     // neither expo nor a packagerName was provided, so let's detect one
-    return removeCmd(pkg, { ...options, packagerName: detectPackager() })
+    return removeCmd(pkg, { ...options, packagerName: detectPackager() });
   }
 
-  return `${cmd} ${pkg}${options.dev ? " --save-dev" : ""}${silent}`
+  return `${cmd} ${pkg}${options.dev ? " --save-dev" : ""}${silent}`;
 }
 
 /**
@@ -139,26 +146,28 @@ function removeCmd(pkg: string, options: PackageOptions = packageInstallOptions)
  *
  */
 function installCmd(options: PackageRunOptions) {
-  const silent = options.silent ? " --silent" : ""
+  const silent = options.silent ? " --silent" : "";
 
   if (options.packagerName === "pnpm") {
-    return `pnpm install${silent}`
+    return `pnpm install${silent}`;
   } else if (options.packagerName === "yarn") {
-    return `yarn install${silent}`
+    return `yarn install${silent}`;
   } else if (options.packagerName === "npm") {
-    return `npm install${silent}`
+    return `npm install${silent}`;
   } else if (options.packagerName === "bun") {
-    return `bun install${silent}`
+    return `bun install${silent}`;
   } else {
-    return installCmd({ ...options, packagerName: detectPackager() })
+    return installCmd({ ...options, packagerName: detectPackager() });
   }
 }
 
-type PackageListOutput = [string, (string) => [string, string][]]
-export function list(options: PackageOptions = packageListOptions): PackageListOutput {
+type PackageListOutput = [string, (string) => [string, string][]];
+export function list(
+  options: PackageOptions = packageListOptions
+): PackageListOutput {
   if (options.packagerName === "pnpm") {
     // TODO: pnpm list?
-    throw new Error("pnpm list is not supported yet")
+    throw new Error("pnpm list is not supported yet");
   } else if (options.packagerName === "bun") {
     return [
       // TODO do we need to add --global here?
@@ -167,12 +176,15 @@ export function list(options: PackageOptions = packageListOptions): PackageListO
         // Parse yarn's human-readable output
         return output
           .split("\n")
-          .reduce((acc: [string, string][], line: string): [string, string][] => {
-            const match = line.match(/info "([^@]+)@([^"]+)" has binaries/)
-            return match ? [...acc, [match[1], match[2]]] : acc
-          }, [])
-      },
-    ]
+          .reduce(
+            (acc: [string, string][], line: string): [string, string][] => {
+              const match = line.match(/info "([^@]+)@([^"]+)" has binaries/);
+              return match ? [...acc, [match[1], match[2]]] : acc;
+            },
+            []
+          );
+      }
+    ];
   } else if (
     options.packagerName === "yarn" ||
     (options.packagerName === undefined && yarnAvailable())
@@ -183,25 +195,30 @@ export function list(options: PackageOptions = packageListOptions): PackageListO
         // Parse yarn's human-readable output
         return output
           .split("\n")
-          .reduce((acc: [string, string][], line: string): [string, string][] => {
-            const match = line.match(/info "([^@]+)@([^"]+)" has binaries/)
-            return match ? [...acc, [match[1], match[2]]] : acc
-          }, [])
-      },
-    ]
+          .reduce(
+            (acc: [string, string][], line: string): [string, string][] => {
+              const match = line.match(/info "([^@]+)@([^"]+)" has binaries/);
+              return match ? [...acc, [match[1], match[2]]] : acc;
+            },
+            []
+          );
+      }
+    ];
   } else {
     return [
       `npm list${options.global ? " --global" : ""} --depth=0 --json`,
       (output: string): [string, string][] => {
         // npm returns a single JSON blob with a "dependencies" key
         // however, sometimes npm can emit warning messages prepended to json output
-        const json = JSON.parse(output.replace(/npm WARN.+/g, ""))
-        return Object.keys(json.dependencies || []).map((key: string): [string, string] => [
-          key,
-          json.dependencies[key].version,
-        ])
-      },
-    ]
+        const json = JSON.parse(output.replace(/npm WARN.+/g, ""));
+        return Object.keys(json.dependencies || []).map(
+          (key: string): [string, string] => [
+            key,
+            json.dependencies[key].version
+          ]
+        );
+      }
+    ];
   }
 }
 
@@ -209,50 +226,59 @@ export function list(options: PackageOptions = packageListOptions): PackageListO
  * Returns a string command to run a script via a packager of your choice.
  */
 function runCmd(command: string, options: PackageOptions) {
-  const silent = options.silent ? " --silent" : ""
+  const silent = options.silent ? " --silent" : "";
   if (options.packagerName === "pnpm") {
-    return `pnpm run ${command}${silent}`
+    return `pnpm run ${command}${silent}`;
   } else if (options.packagerName === "yarn") {
-    return `yarn ${command}${silent}`
+    return `yarn ${command}${silent}`;
   } else if (options.packagerName === "bun") {
-    return `bun run ${command}`
+    return `bun run ${command}`;
   } else {
     // defaults to npm run
-    return `npm run ${command}${silent}`
+    return `npm run ${command}${silent}`;
   }
 }
 
 export const packager = {
-  run: async (command: string, options: PackageRunOptions = packageInstallOptions) => {
+  run: async (
+    command: string,
+    options: PackageRunOptions = packageInstallOptions
+  ) => {
     return spawnProgress(`${runCmd(command, options)}`, {
-      onProgress: options.onProgress,
-    })
+      onProgress: options.onProgress
+    });
   },
-  add: async (pkg: string, options: PackageRunOptions = packageInstallOptions) => {
-    const cmd = addCmd(pkg, options)
-    return spawnProgress(cmd, { onProgress: options.onProgress })
+  add: async (
+    pkg: string,
+    options: PackageRunOptions = packageInstallOptions
+  ) => {
+    const cmd = addCmd(pkg, options);
+    return spawnProgress(cmd, { onProgress: options.onProgress });
   },
-  remove: async (pkg: string, options: PackageRunOptions = packageInstallOptions) => {
-    const cmd = removeCmd(pkg, options)
-    return spawnProgress(cmd, { onProgress: options.onProgress })
+  remove: async (
+    pkg: string,
+    options: PackageRunOptions = packageInstallOptions
+  ) => {
+    const cmd = removeCmd(pkg, options);
+    return spawnProgress(cmd, { onProgress: options.onProgress });
   },
   install: async (options: PackageRunOptions = packageInstallOptions) => {
-    const cmd = installCmd(options)
-    return spawnProgress(cmd, { onProgress: options.onProgress })
+    const cmd = installCmd(options);
+    return spawnProgress(cmd, { onProgress: options.onProgress });
   },
   list: async (options: PackageOptions = packageListOptions) => {
-    const [cmd, parseFn] = list(options)
-    return parseFn(await spawnProgress(cmd, {}))
+    const [cmd, parseFn] = list(options);
+    return parseFn(await spawnProgress(cmd, {}));
   },
   has: (packageManager: "yarn" | "npm" | "pnpm" | "bun"): boolean => {
-    if (packageManager === "yarn") return yarnAvailable()
-    if (packageManager === "pnpm") return pnpmAvailable()
-    if (packageManager === "bun") return bunAvailable()
-    return true
+    if (packageManager === "yarn") return yarnAvailable();
+    if (packageManager === "pnpm") return pnpmAvailable();
+    if (packageManager === "bun") return bunAvailable();
+    return true;
   },
   detectPackager,
   runCmd,
   addCmd,
   installCmd,
-  availablePackagers,
-}
+  availablePackagers
+};

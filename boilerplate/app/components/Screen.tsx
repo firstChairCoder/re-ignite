@@ -1,19 +1,19 @@
 import { useScrollToTop } from "@react-navigation/native"
-import { StatusBar, StatusBarProps } from "expo-status-bar"
+import type { StatusBarProps } from "expo-status-bar"
+import { StatusBar } from "expo-status-bar"
 import React, { useRef, useState } from "react"
-import {
-  KeyboardAvoidingView,
+import type {
   KeyboardAvoidingViewProps,
   LayoutChangeEvent,
-  Platform,
-  ScrollView,
   ScrollViewProps,
   StyleProp,
-  View,
-  ViewStyle,
+  ViewStyle
 } from "react-native"
+import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native"
+
 import { colors } from "../theme"
-import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
+import type { ExtendedEdge } from "../utils/useSafeAreaInsetsStyle"
+import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 
 interface BaseScreenProps {
   /**
@@ -133,7 +133,7 @@ function useAutoPreset(props: AutoScreenProps) {
   return {
     scrollEnabled: preset === "auto" ? scrollEnabled : true,
     onContentSizeChange,
-    onLayout,
+    onLayout
   }
 }
 
@@ -152,7 +152,7 @@ function ScreenWithScrolling(props: ScreenProps) {
     keyboardShouldPersistTaps = "handled",
     contentContainerStyle,
     ScrollViewProps,
-    style,
+    style
   } = props as ScrollScreenProps
 
   const ref = useRef<ScrollView>(null)
@@ -179,7 +179,7 @@ function ScreenWithScrolling(props: ScreenProps) {
       contentContainerStyle={[
         $innerStyle,
         ScrollViewProps?.contentContainerStyle,
-        contentContainerStyle,
+        contentContainerStyle
       ]}
     >
       {children}
@@ -194,7 +194,7 @@ export function Screen(props: ScreenProps) {
     keyboardOffset = 0,
     safeAreaEdges,
     StatusBarProps,
-    statusBarStyle = "dark",
+    statusBarStyle = "dark"
   } = props
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
@@ -222,20 +222,20 @@ export function Screen(props: ScreenProps) {
 const $containerStyle: ViewStyle = {
   flex: 1,
   height: "100%",
-  width: "100%",
+  width: "100%"
 }
 
 const $keyboardAvoidingViewStyle: ViewStyle = {
-  flex: 1,
+  flex: 1
 }
 
 const $outerStyle: ViewStyle = {
   flex: 1,
   height: "100%",
-  width: "100%",
+  width: "100%"
 }
 
 const $innerStyle: ViewStyle = {
   justifyContent: "flex-start",
-  alignItems: "stretch",
+  alignItems: "stretch"
 }

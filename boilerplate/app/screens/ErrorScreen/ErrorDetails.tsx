@@ -1,5 +1,8 @@
-import React, { ErrorInfo } from "react"
-import { ScrollView, TextStyle, View, ViewStyle } from "react-native"
+import type { ErrorInfo } from "react"
+import React from "react"
+import type { TextStyle, ViewStyle } from "react-native"
+import { ScrollView, View } from "react-native"
+
 import { Button, Icon, Screen, Text } from "../../components"
 import { colors, spacing } from "../../theme"
 
@@ -45,40 +48,40 @@ const $contentContainer: ViewStyle = {
   alignItems: "center",
   paddingHorizontal: spacing.lg,
   paddingTop: spacing.xl,
-  flex: 1,
+  flex: 1
 }
 
 const $topSection: ViewStyle = {
   flex: 1,
-  alignItems: "center",
+  alignItems: "center"
 }
 
 const $heading: TextStyle = {
   color: colors.error,
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }
 
 const $errorSection: ViewStyle = {
   flex: 2,
   backgroundColor: colors.separator,
   marginVertical: spacing.md,
-  borderRadius: 6,
+  borderRadius: 6
 }
 
 const $errorSectionContentContainer: ViewStyle = {
-  padding: spacing.md,
+  padding: spacing.md
 }
 
 const $errorContent: TextStyle = {
-  color: colors.error,
+  color: colors.error
 }
 
 const $errorBacktrace: TextStyle = {
   marginTop: spacing.md,
-  color: colors.textDim,
+  color: colors.textDim
 }
 
 const $resetButton: ViewStyle = {
   backgroundColor: colors.error,
-  paddingHorizontal: spacing.xxl,
+  paddingHorizontal: spacing.xxl
 }

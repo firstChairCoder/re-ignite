@@ -1,5 +1,6 @@
-import { FlexStyle } from "react-native"
-import { Edge, useSafeAreaInsets } from "react-native-safe-area-context"
+import type { FlexStyle } from "react-native"
+import type { Edge } from "react-native-safe-area-context"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 export type ExtendedEdge = Edge | "start" | "end"
 
@@ -9,12 +10,12 @@ const propertySuffixMap = {
   left: "Start",
   right: "End",
   start: "Start",
-  end: "End",
+  end: "End"
 }
 
 const edgeInsetMap: Record<string, Edge> = {
   start: "left",
-  end: "right",
+  end: "right"
 }
 
 /**
@@ -24,7 +25,7 @@ const edgeInsetMap: Record<string, Edge> = {
  */
 export function useSafeAreaInsetsStyle(
   safeAreaEdges: ExtendedEdge[] = [],
-  property: "padding" | "margin" = "padding",
+  property: "padding" | "margin" = "padding"
 ): Pick<
   FlexStyle,
   | "marginBottom"

@@ -1,13 +1,16 @@
 import { observer } from "mobx-react-lite"
-import React, { FC } from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import type { FC } from "react"
+import React from "react"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { Image, View } from "react-native"
 import {
   Button, // @demo remove-current-line
-  Text,
+  Text
 } from "app/components"
+
 import { isRTL } from "../i18n"
 import { useStores } from "../models" // @demo remove-current-line
-import { AppStackScreenProps } from "../navigators"
+import type { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { useHeader } from "../utils/useHeader" // @demo remove-current-line
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
@@ -15,15 +18,15 @@ import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 const welcomeLogo = require("../../assets/images/logo.png")
 const welcomeFace = require("../../assets/images/welcome-face.png")
 
-interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> {}
+type WelcomeScreenProps = AppStackScreenProps<"Welcome">
 
 export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeScreen(
-  _props, // @demo remove-current-line
+  _props // @demo remove-current-line
 ) {
   // @demo remove-block-start
   const { navigation } = _props
   const {
-    authenticationStore: { logout },
+    authenticationStore: { logout }
   } = useStores()
 
   function goNext() {
@@ -33,9 +36,9 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   useHeader(
     {
       rightTx: "common.logOut",
-      onRightPress: logout,
+      onRightPress: logout
     },
-    [logout],
+    [logout]
   )
   // @demo remove-block-end
 
@@ -72,7 +75,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
 
 const $container: ViewStyle = {
   flex: 1,
-  backgroundColor: colors.background,
+  backgroundColor: colors.background
 }
 
 const $topContainer: ViewStyle = {
@@ -80,7 +83,7 @@ const $topContainer: ViewStyle = {
   flexGrow: 1,
   flexBasis: "57%",
   justifyContent: "center",
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.lg
 }
 
 const $bottomContainer: ViewStyle = {
@@ -91,12 +94,12 @@ const $bottomContainer: ViewStyle = {
   borderTopLeftRadius: 16,
   borderTopRightRadius: 16,
   paddingHorizontal: spacing.lg,
-  justifyContent: "space-around",
+  justifyContent: "space-around"
 }
 const $welcomeLogo: ImageStyle = {
   height: 88,
   width: "100%",
-  marginBottom: spacing.xxl,
+  marginBottom: spacing.xxl
 }
 
 const $welcomeFace: ImageStyle = {
@@ -105,9 +108,9 @@ const $welcomeFace: ImageStyle = {
   position: "absolute",
   bottom: -47,
   right: -80,
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
+  transform: [{ scaleX: isRTL ? -1 : 1 }]
 }
 
 const $welcomeHeading: TextStyle = {
-  marginBottom: spacing.md,
+  marginBottom: spacing.md
 }

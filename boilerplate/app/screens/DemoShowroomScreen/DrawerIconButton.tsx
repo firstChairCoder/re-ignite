@@ -1,11 +1,13 @@
 import React from "react"
-import { Pressable, PressableProps, ViewStyle } from "react-native"
+import type { PressableProps, ViewStyle } from "react-native"
+import { Pressable } from "react-native"
 import Animated, { interpolate, interpolateColor, useAnimatedStyle } from "react-native-reanimated"
 import { useDrawerProgress } from "react-native-drawer-layout"
+
 import { isRTL } from "../../i18n"
 import { colors, spacing } from "../../theme"
 
-interface DrawerIconButtonProps extends PressableProps {}
+type DrawerIconButtonProps = PressableProps
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
@@ -17,7 +19,7 @@ export function DrawerIconButton(props: DrawerIconButtonProps) {
     const translateX = interpolate(progress.value, [0, 1], [0, isRTL ? 60 : -60])
 
     return {
-      transform: [{ translateX }],
+      transform: [{ translateX }]
     }
   })
 
@@ -33,7 +35,7 @@ export function DrawerIconButton(props: DrawerIconButtonProps) {
       marginStart,
       marginBottom,
       width,
-      transform: [{ rotate: `${rotate}deg` }],
+      transform: [{ rotate: `${rotate}deg` }]
     }
   })
 
@@ -43,7 +45,7 @@ export function DrawerIconButton(props: DrawerIconButtonProps) {
 
     return {
       backgroundColor,
-      width,
+      width
     }
   })
 
@@ -59,7 +61,7 @@ export function DrawerIconButton(props: DrawerIconButtonProps) {
       marginStart,
       width,
       marginTop,
-      transform: [{ rotate: `${rotate}deg` }],
+      transform: [{ rotate: `${rotate}deg` }]
     }
   })
 
@@ -80,20 +82,20 @@ const $container: ViewStyle = {
   alignItems: "center",
   height: 56,
   justifyContent: "center",
-  width: 56,
+  width: 56
 }
 
 const $topBar: ViewStyle = {
-  height: barHeight,
+  height: barHeight
 }
 
 const $middleBar: ViewStyle = {
   height: barHeight,
-  marginTop: spacing.xxs,
+  marginTop: spacing.xxs
 }
 
 const $bottomBar: ViewStyle = {
-  height: barHeight,
+  height: barHeight
 }
 
 // @demo remove-file

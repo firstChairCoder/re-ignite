@@ -1,10 +1,11 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import type { Instance, SnapshotOut } from "mobx-state-tree"
+import { types } from "mobx-state-tree"
 
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")
   .props({
     authToken: types.maybe(types.string),
-    authEmail: "",
+    authEmail: ""
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -16,7 +17,7 @@ export const AuthenticationStoreModel = types
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail))
         return "must be a valid email address"
       return ""
-    },
+    }
   }))
   .actions((store) => ({
     setAuthToken(value?: string) {
@@ -28,10 +29,10 @@ export const AuthenticationStoreModel = types
     logout() {
       store.authToken = undefined
       store.authEmail = ""
-    },
+    }
   }))
 
-export interface AuthenticationStore extends Instance<typeof AuthenticationStoreModel> {}
-export interface AuthenticationStoreSnapshot extends SnapshotOut<typeof AuthenticationStoreModel> {}
+export type AuthenticationStore = Instance<typeof AuthenticationStoreModel>
+export type AuthenticationStoreSnapshot = SnapshotOut<typeof AuthenticationStoreModel>
 
 // @demo remove-file

@@ -1,9 +1,13 @@
 import React from "react"
-import { Image, ImageProps, ImageStyle, StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import type { ImageProps, ImageStyle, StyleProp, TextStyle, ViewStyle } from "react-native"
+import { Image, View } from "react-native"
+
 import { translate } from "../i18n"
 import { spacing } from "../theme"
-import { Button, ButtonProps } from "./Button"
-import { Text, TextProps } from "./Text"
+import type { ButtonProps } from "./Button"
+import { Button } from "./Button"
+import type { TextProps } from "./Text"
+import { Text } from "./Text"
 
 const sadFace = require("../../assets/images/sad-face.png")
 
@@ -113,8 +117,8 @@ const EmptyStatePresets = {
     imageSource: sadFace,
     heading: translate("emptyStateComponent.generic.heading"),
     content: translate("emptyStateComponent.generic.content"),
-    button: translate("emptyStateComponent.generic.button"),
-  } as EmptyStatePresetItem,
+    button: translate("emptyStateComponent.generic.button")
+  } as EmptyStatePresetItem
 } as const
 
 /**
@@ -146,7 +150,7 @@ export function EmptyState(props: EmptyStateProps) {
     ButtonProps,
     ContentTextProps,
     HeadingTextProps,
-    ImageProps,
+    ImageProps
   } = props
 
   const isImagePresent = !!imageSource
@@ -159,26 +163,26 @@ export function EmptyState(props: EmptyStateProps) {
     $image,
     (isHeadingPresent || isContentPresent || isButtonPresent) && { marginBottom: spacing.xxxs },
     $imageStyleOverride,
-    ImageProps?.style,
+    ImageProps?.style
   ]
   const $headingStyles = [
     $heading,
     isImagePresent && { marginTop: spacing.xxxs },
     (isContentPresent || isButtonPresent) && { marginBottom: spacing.xxxs },
     $headingStyleOverride,
-    HeadingTextProps?.style,
+    HeadingTextProps?.style
   ]
   const $contentStyles = [
     $content,
     (isImagePresent || isHeadingPresent) && { marginTop: spacing.xxxs },
     isButtonPresent && { marginBottom: spacing.xxxs },
     $contentStyleOverride,
-    ContentTextProps?.style,
+    ContentTextProps?.style
   ]
   const $buttonStyles = [
     (isImagePresent || isHeadingPresent || isContentPresent) && { marginTop: spacing.xl },
     $buttonStyleOverride,
-    ButtonProps?.style,
+    ButtonProps?.style
   ]
 
   return (

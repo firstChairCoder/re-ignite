@@ -1,4 +1,6 @@
-import React, { Component, ErrorInfo, ReactNode } from "react"
+import type { ErrorInfo, ReactNode } from "react"
+import React, { Component } from "react"
+
 import { ErrorDetails } from "./ErrorDetails"
 
 interface Props {
@@ -32,7 +34,7 @@ export class ErrorBoundary extends Component<Props, State> {
     // Catch errors in any components below and re-render with error message
     this.setState({
       error,
-      errorInfo,
+      errorInfo
     })
 
     // You can also log error messages to an error reporting service here
