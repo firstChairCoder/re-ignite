@@ -4,8 +4,8 @@ import App from "./app/app"
 
 SplashScreen.preventAutoHideAsync()
 
-function IgniteApp() {
+function MainApp() {
   return <App hideSplashScreen={SplashScreen.hideAsync} />
 }
 
-export default IgniteApp
+export default MainApp

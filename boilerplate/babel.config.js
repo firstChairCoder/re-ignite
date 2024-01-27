@@ -2,18 +2,34 @@
 const plugins = [
   /** react-native-reanimated web support @see https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#web */
   "@babel/plugin-proposal-export-namespace-from",
+  [
+    "module-resolver",
+    {
+      root: ["./src"],
+      extensions: [".ts", ".tsx", ".js", ".json"],
+      alias: {
+        "~": "./src"
+      }
+    }
+  ],
+  [
+    "babel-plugin-inline-import",
+    {
+      extensions: ".svg"
+    }
+  ],
   /** NOTE: This must be last in the plugins @see https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#babel-plugin */
-  "react-native-reanimated/plugin",
+  "react-native-reanimated/plugin"
 ]
 
 /** @type {import('@babel/core').TransformOptions} */
-module.exports = function(api) {
-  api.cache(true);
+module.exports = function (api) {
+  api.cache(true)
   return {
     presets: ["babel-preset-expo"],
     env: {
-      production: {},
+      production: {}
     },
-    plugins,
-  };
-};
+    plugins
+  }
+}
