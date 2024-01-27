@@ -9,13 +9,30 @@ import {
   SpaceGrotesk_400Regular as spaceGroteskRegular,
   SpaceGrotesk_600SemiBold as spaceGroteskSemiBold
 } from "@expo-google-fonts/space-grotesk"
+import {
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_500Medium
+} from "@expo-google-fonts/montserrat"
+import {
+  OpenSans_600SemiBold,
+  OpenSans_700Bold,
+  OpenSans_800ExtraBold
+} from "@expo-google-fonts/open-sans"
 
 export const customFontsToLoad = {
   spaceGroteskLight,
   spaceGroteskRegular,
   spaceGroteskMedium,
   spaceGroteskSemiBold,
-  spaceGroteskBold
+  spaceGroteskBold,
+  //TODO: replace completely with personal font choice
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_500Medium,
+  OpenSans_600SemiBold,
+  OpenSans_700Bold,
+  OpenSans_800ExtraBold
 }
 
 const fonts = {
@@ -26,6 +43,16 @@ const fonts = {
     medium: "spaceGroteskMedium",
     semiBold: "spaceGroteskSemiBold",
     bold: "spaceGroteskBold"
+  },
+  montserrat: {
+    light: Montserrat_300Light,
+    medium: Montserrat_500Medium,
+    regular: Montserrat_400Regular
+  },
+  openSans: {
+    semiBold: OpenSans_600SemiBold,
+    bold: OpenSans_700Bold,
+    extra: OpenSans_800ExtraBold
   },
   helveticaNeue: {
     // iOS only font.

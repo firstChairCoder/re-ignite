@@ -24,6 +24,7 @@ import * as Linking from "expo-linking"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import type { ViewStyle } from "react-native"
 import { Provider as StoreProvider } from "react-redux"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import { useInitialRootStore } from "./models"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
@@ -35,6 +36,11 @@ import { store } from "./store"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
+const $container: ViewStyle = {
+  flex: 1
+}
+
+const queryClient = new QueryClient()
 // Web linking configuration
 const prefix = Linking.createURL("/")
 const config = {
@@ -71,7 +77,7 @@ function App(props: AppProps) {
     isRestored: isNavigationStateRestored
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
-  const [areFontsLoaded] = useFonts(customFontsToLoad)
+  const [fontsLoaded] = useFonts(customFontsToLoad)
 
   const { rehydrated } = useInitialRootStore(() => {
     // This runs after the root store has been initialized and rehydrated.
@@ -89,7 +95,7 @@ function App(props: AppProps) {
   // In iOS: application:didFinishLaunchingWithOptions:
   // In Android: https://stackoverflow.com/a/45838109/204044
   // You can replace with your own loading component if you wish.
-  if (!rehydrated || !isNavigationStateRestored || !areFontsLoaded) return null
+  if (!rehydrated || !isNavigationStateRestored || !fontsLoaded) return null
 
   const linking = {
     prefixes: [prefix],
@@ -102,11 +108,13 @@ function App(props: AppProps) {
       <ErrorBoundary catchErrors={Config.catchErrors}>
         <GestureHandlerRootView style={$container}>
           <StoreProvider store={store}>
-            <AppNavigator
-              linking={linking}
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />
+            <QueryClientProvider client={queryClient}>
+              <AppNavigator
+                linking={linking}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </QueryClientProvider>
           </StoreProvider>
         </GestureHandlerRootView>
       </ErrorBoundary>
@@ -115,7 +123,3 @@ function App(props: AppProps) {
 }
 
 export default App
-
-const $container: ViewStyle = {
-  flex: 1
-}
