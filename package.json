@@ -1,161 +1,103 @@
 {
-  "name": "ignite-cli",
-  "version": "9.3.1",
-  "description": "Infinite Red's hottest boilerplate for React Native.",
-  "bin": {
-    "ignite": "bin/ignite",
-    "ignite-cli": "bin/ignite"
-  },
-  "preferGlobal": true,
-  "license": "MIT",
-  "repository": "infinitered/ignite",
-  "homepage": "https://github.com/infinitered/ignite",
-  "files": [
-    "boilerplate",
-    "build",
-    "bin",
-    "README.md",
-    "template.config.js"
-  ],
-  "author": {
-    "name": "Infinite Red",
-    "email": "npm@infinite.red",
-    "url": "https://github.com/infinitered/ignite"
-  },
+  "name": "re-ignite",
+  "version": "0.0.1",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "compile": "tsc -p .",
-    "typecheck": "tsc -p . --noEmit",
-    "build": "yarn clean && yarn compile && yarn build:assets",
-    "build:assets": "cp ./boilerplate/.gitignore ./boilerplate/.gitignore.template && cp ./src/assets/*.txt ./build/assets/",
-    "build:watch": "yarn build && yarn compile --watch",
-    "format": "prettier '**/*{.js,.ts,.tsx,.json,.md}'",
-    "format:write": "yarn format --write",
-    "format:check": "yarn format --check",
-    "lint": "eslint 'src/**' 'test/**'",
-    "test": "TS_JEST_DISABLE_VER_CHECKER=true jest",
-    "watch": "jest --watch",
-    "watch:debug": "yarn watch --runInBand --verbose",
-    "coverage": "jest --coverage",
-    "ci:publish": "yarn build && yarn semantic-release && yarn clean",
-    "semantic-release": "semantic-release",
-    "clean": "rm -drf ./build ./boilerplate/.gitignore.template ./boilerplate/node_modules ./boilerplate/ios/build/ ./boilerplate/ios/Pods/ ./boilerplate/android/app/build ./boilerplate/ios/.xcode.env.local",
-    "ignite-cli:dev": "node bin/ignite",
-    "ignite-cli:prod": "wrap () { node bin/ignite \"$@\" --compiled-build | cat; }; wrap"
-  },
-  "engines": {
-    "node": ">=18"
+    "compile": "tsc --noEmit -p . --pretty",
+    "format": "prettier --write \"app/**/*.{js,jsx,json,md,ts,tsx}\"",
+    "lint": "eslint App.tsx app test --fix --ext .js,.ts,.tsx && yarn format",
+    "patch": "patch-package",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:maestro": "maestro test .maestro/FavoritePodcast.yaml",
+    "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
+    "postinstall": "patch-package",
+    "bundle:visualize": "npx react-native-bundle-visualizer",
+    "bundle:visualize:dev": "npx react-native-bundle-visualizer --dev",
+    "build:ios:sim": "eas build --profile development --platform ios --local",
+    "build:ios:dev": "eas build --profile development:device --platform ios --local",
+    "build:ios:prod": "eas build --profile production --platform ios --local",
+    "build:android:sim": "eas build --profile development --platform android --local",
+    "build:android:dev": "eas build --profile development:device --platform android --local",
+    "build:android:prod": "eas build --profile production --platform android --local",
+    "start": "npx expo start",
+    "android": "npx expo start --android",
+    "ios": "npx expo start --ios",
+    "web": "npx expo start --web",
+    "bundle:web": "npx expo export --platform web",
+    "serve:web": "npx server dist",
+    "prebuild:clean": "npx expo prebuild --clean",
+    "prebuild": "npx expo prebuild"
   },
   "dependencies": {
-    "deepmerge-json": "^1.1.0",
-    "gluegun": "5.1.2",
-    "sharp": "^0.30.4",
-    "yaml": "^1.10.0"
+    "@expo-google-fonts/space-grotesk": "0.2.2",
+    "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-navigation/bottom-tabs": "6.3.2",
+    "@react-navigation/native": "6.0.2",
+    "@react-navigation/native-stack": "6.0.2",
+    "@reduxjs/toolkit": "2.1.0",
+    "@shopify/flash-list": "1.6.1",
+    "apisauce": "3.0.1",
+    "date-fns": "2.30.0",
+    "expo": "50.0.3",
+    "expo-application": "5.8.3",
+    "expo-build-properties": "0.11.0",
+    "expo-dev-client": "3.3.7",
+    "expo-font": "11.10.2",
+    "expo-linking": "6.2.2",
+    "expo-localization": "14.8.3",
+    "expo-splash-screen": "0.26.4",
+    "expo-status-bar": "1.11.1",
+    "i18n-js": "3.9.2",
+    "mobx": "6.10.2",
+    "mobx-react-lite": "4.0.5",
+    "mobx-state-tree": "5.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.73.2",
+    "react-native-drawer-layout": "4.0.0-alpha.1",
+    "react-native-gesture-handler": "2.14.0",
+    "react-native-mmkv": "2.11.0",
+    "react-native-reanimated": "3.6.0",
+    "react-native-safe-area-context": "4.8.2",
+    "react-native-screens": "3.29.0",
+    "react-native-web": "0.19.6",
+    "react-redux": "9.1.0"
   },
   "devDependencies": {
-    "@rnx-kit/metro-config": "^1.2.26",
-    "@rnx-kit/metro-resolver-symlinks": "^0.1.15",
-    "@semantic-release/git": "^9.0.0",
-    "@types/jest": "^27.0.1",
-    "@types/node": "16.6.1",
-    "@types/sharp": "^0.30.2",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.23.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "husky": "^7.0.1",
-    "jest": "^27.0.6",
-    "prettier": "2.8.8",
-    "semantic-release": "^17.4.2",
-    "ts-jest": "^27.0.4",
-    "ts-node": "^10.2.0",
-    "typescript": "^5.0.4"
+    "@babel/core": "^7.20.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-transform-arrow-functions": "^7.0.0",
+    "@babel/plugin-transform-shorthand-properties": "^7.0.0",
+    "@babel/plugin-transform-template-literals": "^7.0.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@types/i18n-js": "3.8.2",
+    "@types/jest": "29.2.1",
+    "@types/react": "18.2.14",
+    "@types/react-test-renderer": "18.0.0",
+    "babel-jest": "^29.2.1",
+    "eslint": "7.32.0",
+    "eslint-config-react-native-wcandillon": "3.10.2",
+    "eslint-plugin-reactotron": "0.1.4",
+    "eslint-plugin-unused-imports": "3.2.0",
+    "jest": "^29.2.1",
+    "jest-expo": "49.0.0",
+    "patch-package": "6.4.7",
+    "postinstall-prepare": "1.0.1",
+    "react-test-renderer": "18.2.0",
+    "reactotron-core-client": "2.8.11",
+    "reactotron-mst": "3.1.5",
+    "reactotron-react-js": "3.3.9",
+    "reactotron-react-native": "5.0.4",
+    "ts-jest": "29.1.5",
+    "ts-node": "10.9.2",
+    "typescript": "5.3.2"
   },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "prettier",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "globals": {
-      "__DEV__": false,
-      "jasmine": false,
-      "beforeAll": false,
-      "afterAll": false,
-      "beforeEach": false,
-      "afterEach": false,
-      "test": false,
-      "expect": false,
-      "describe": false,
-      "jest": false,
-      "it": false
-    },
-    "rules": {
-      "@typescript-eslint/ban-ts-ignore": 0,
-      "@typescript-eslint/ban-ts-comment": 0,
-      "@typescript-eslint/explicit-function-return-type": 0,
-      "@typescript-eslint/explicit-member-accessibility": 0,
-      "@typescript-eslint/explicit-module-boundary-types": 0,
-      "@typescript-eslint/indent": 0,
-      "@typescript-eslint/member-delimiter-style": 0,
-      "@typescript-eslint/no-empty-interface": 0,
-      "@typescript-eslint/no-explicit-any": 0,
-      "@typescript-eslint/no-object-literal-type-assertion": 0,
-      "@typescript-eslint/no-var-requires": 0,
-      "@typescript-eslint/no-use-before-define": 0,
-      "comma-dangle": 0,
-      "multiline-ternary": 0,
-      "no-undef": 0,
-      "no-unused-vars": 0,
-      "no-use-before-define": "off",
-      "quotes": 0,
-      "space-before-function-paren": 0
-    },
-    "ignorePatterns": [
-      "**/*.snap",
-      "**/*.txt",
-      "bin/ignite"
-    ]
-  },
-  "prettier": {
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": false,
-    "trailingComma": "all"
-  },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      [
-        "@semantic-release/git",
-        {
-          "assets": "package.json",
-          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-        }
-      ]
-    ]
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/boilerplate/"
-    ],
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ]
+  "engines": {
+    "node": ">=16"
   }
 }
