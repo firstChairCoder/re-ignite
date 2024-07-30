@@ -47,6 +47,7 @@
 	  "react-native/no-inline-styles": "off",
 	  "react-native/no-raw-text": "off",
 	  "react-native/no-color-literals": "off",
+	  "max-len": ["error", { "code": 160 }],
 	  "react-native/sort-styles": [
 		"error",
 		"asc",
